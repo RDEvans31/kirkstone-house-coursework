@@ -1,0 +1,26 @@
+<html>
+<head>
+</head>
+<script>
+funtion showform() {
+  var form=document.getElementById('subjectform');
+  if (form.style.display==="none"){
+    form.style.display="block";
+} else {
+    form.style.display="none";
+}
+
+}
+</script>
+<body>
+<h>This page will just be for designing adn testing the forms</h><br>
+
+<form id="addingsubject" action="addsubjectscript.php" method="POST">
+  <p>This form is for adding the subject</p><br>
+  Subject:<input type="text" name="subjectname"><br>
+  Content:<input type="text" name="subjectcontents"><br>
+  <input type="Submit" value="Add">
+</form>
+
+</body>
+</html>
