@@ -13,17 +13,24 @@ funtion showform() {
 }
 </script>
 <body>
-<h>This page will just be for designing adn testing the forms</h><br>
+<h>This page will just be for designing and testing the forms</h><br>
 
-<form id="addingsubject" action="addsubjectscript.php" method="POST">
+<form id="addingsubject" action="addsubjectscript.php" method="POST" style="display:none;">
   <!--This form is for adding a new subject to tblsubject, it sends the these variables to addsubjectscript.php-->
   Subject:<input type="text" name="subjectname"><br>
   Content:<input type="text" name="subjectcontents"><br>
   <input type="Submit" value="Add">
 </form>
+
+
 <form id="addinguser" action="adduserscript.php" method="POST">
   <!--This is for adding a new user to tbluser -->
-
+  First name:<input type="text" name="firstname"><br>
+  Surname: <input type="text" name="surname"><br>
+  Username: <input type="text" name="username"><br>
+  Password: <input type="password" name="password"><br>
+  Privilege:<input type="radio" name="privilege" value=0>Admin<input type="radio" name="privilege" value=1>Teacher<br>
+  <input type="Submit" value="Add">
 </form>
 </body>
 </html>
