@@ -15,7 +15,7 @@ funtion showform() {
 <body>
 <h>This page will just be for designing and testing the forms</h><br>
 
-<form id="addingsubject" action="addsubjectscript.php" method="POST" style="display:none;">
+<form id="addingsubject" action="addsubjectscript.php" method="post" style="display:none;">
   <!--This form is for adding a new subject to tblsubject, it sends the these variables to addsubjectscript.php-->
   Subject:<input type="text" name="subjectname"><br>
   Content:<input type="text" name="subjectcontents"><br>
@@ -23,7 +23,7 @@ funtion showform() {
 </form>
 
 
-<form id="addinguser" action="adduserscript.php" method="POST">
+<form id="addinguser" action="adduserscript.php" method="post" style="display:none;">
   <!--This is for adding a new user to tbluser -->
   First name:<input type="text" name="firstname"><br>
   Surname: <input type="text" name="surname"><br>
@@ -31,6 +31,22 @@ funtion showform() {
   Password: <input type="password" name="password"><br>
   Privilege:<input type="radio" name="privilege" value=0>Admin<input type="radio" name="privilege" value=1>Teacher<br>
   <input type="Submit" value="Add">
+</form>
+<br>
+<form id="addingpupil" action="addpupilscript.php" method="post">
+  <!-- this is for adding a new pupil to tblpupil-->
+  First name:<input type="text" name="pupilfirstname"><br>
+  Surname: <input type="text" name="pupilsurname"><br>
+  Year: <input type="number" name="yeargroup"><br>
+  Tutor group:<input type="text" name="tutorgroup"><br>
+  Date of Birth: <input type="date" name='dob'><br>
+  <p>Please enter their Midyis scores below:</p>
+  Vocabulary:<input type="text" name="MVocab"><br>
+  Mathematics:<input type="text" name="MMath"><br>
+  Non-Verbal:<input type="text" name="MNonVerbal"><br>
+  Skills:<input type="text" name="MSkills"><br>
+  Score:<input type="text" name="MScore"><br>
+  <input type="submit" value="Add"><br>
 </form>
 </body>
 </html>
