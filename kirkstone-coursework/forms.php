@@ -33,7 +33,7 @@ funtion showform() {
   <input type="Submit" value="Add">
 </form>
 <br>
-<form id="addingpupil" action="addpupilscript.php" method="post">
+<form id="addingpupil" action="addpupilscript.php" method="post" style="display:none;">
   <!-- this is for adding a new pupil to tblpupil-->
   First name:<input type="text" name="pupilfirstname"><br>
   Surname: <input type="text" name="pupilsurname"><br>
@@ -47,6 +47,34 @@ funtion showform() {
   Skills:<input type="text" name="MSkills"><br>
   Score:<input type="text" name="MScore"><br>
   <input type="submit" value="Add"><br>
+</form>
+<form id="teachersubject" action="teachersubjectscript.php" method="post" style="">
+  <!--this essentially assigns a teacher to a subject using the userid and subjectid keys-->
+  Teacher:<select name="userid">
+    <option value="null">Select a teacher</option>
+    <?php
+    include_once("connection.php");
+    $stmt=$conn->prepare("SELECT * FROM tblusers WHERE privilege=1");
+    $stmt->execute(); //this selects all record in tblusers that have privilege 1, meaning they are a teacher
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
+    {
+      echo('<option value='.$row["Userid"].'>'.$row["Firstname"].' '.$row["Surname"].'</option>');//this prints them as options
+    }
+    ?>
+  </select><br>
+  <br>
+  Subject:<select name="subjectid">
+    <option value="null">Select a subject</option>
+    <?php
+    $stmt=$conn->prepare("SELECT * FROM tblsubject");
+    $stmt->execute(); //this selects all record in tblsubject
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
+    {
+      echo('<option value='.$row["Subjectid"].'>'.$row["Subjectname"].'</option>');//this prints them as options
+    }
+    ?>
+  </select><br>
+<input type="Submit" value="Assign">
 </form>
 </body>
 </html>

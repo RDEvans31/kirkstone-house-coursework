@@ -19,7 +19,7 @@ $stmt->bindParam(':password', $password);
 $stmt->bindParam(':privilege', $privilege);
 $stmt->execute(); //executes the SQL with said contents
 $conn=null;
-echo("Data transfer successful")
+echo("Data transfer successful");
 ?>
 </body>
 </html>

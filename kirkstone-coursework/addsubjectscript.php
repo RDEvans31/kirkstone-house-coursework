@@ -12,7 +12,7 @@ $stmt->bindParam(':subject', $_POST["subjectname"]); //assigns the input from th
 $stmt->bindParam(':content', $_POST["subjectcontents"]);
 $stmt->execute(); //executes the SQL with said contents
 $conn=null;
-echo("Data transfer successful")
+echo("Data transfer successful");
 
 ?>
 </body>

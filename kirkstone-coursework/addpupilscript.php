@@ -16,7 +16,7 @@ $stmt->bindParam(':skills', $_POST["MSkills"]);
 $stmt->bindParam(':score', $_POST["MScore"]);
 $stmt->execute(); //executes the SQL with said contents
 $conn=null;
-echo("Data transfer successful")
+echo("Data transfer successful");
 ?>
 </body>
 </html>
