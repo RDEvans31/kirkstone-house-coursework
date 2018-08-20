@@ -74,7 +74,7 @@ funtion showform() {
     }
     ?>
   </select><br>
-<input type="Submit" value="Assign">
+  <input type="Submit" value="Assign">
 </form>
 </body>
 </html>
