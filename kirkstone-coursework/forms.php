@@ -2,8 +2,8 @@
 <head>
 </head>
 <script>
-funtion showform() {
-  var form=document.getElementById('subjectform');
+function showform(formid) {
+  var form=document.getElementById(formid);
   if (form.style.display==="none"){
     form.style.display="block";
 } else {
@@ -48,7 +48,7 @@ funtion showform() {
   Score:<input type="text" name="MScore"><br>
   <input type="submit" value="Add"><br>
 </form>
-<form id="teachersubject" action="teachersubjectscript.php" method="post" style="">
+<form id="teachersubject" action="teachersubjectscript.php" method="post" style="display:none;">
   <!--this essentially assigns a teacher to a subject using the userid and subjectid keys-->
   Teacher:<select name="userid">
     <option value="null">Select a teacher</option>
@@ -71,6 +71,63 @@ funtion showform() {
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
     {
       echo('<option value='.$row["Subjectid"].'>'.$row["Subjectname"].'</option>');//this prints them as options
+    }
+    ?>
+  </select><br>
+  <input type="Submit" value="Assign">
+</form>
+<form id="pupilsubject" action="pupilsubjectscript.php" method="post" style="display:none;">
+
+  Pupil:<select name="pupilid">
+    <option value="null">Select a pupil</option>
+    <?php
+    include_once("connection.php");
+    $stmt=$conn->prepare("SELECT * FROM tblpupil");
+    $stmt->execute(); //this selects all record in tblpupil
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
+    {
+      echo('<option value='.$row["Pupilid"].'>'.$row["Firstname"].' '.$row["Surname"].'</option>');//this prints them as options
+    }
+    ?>
+  </select><br>
+  <br>
+  Subject:<select name="subjectid">
+    <option value="null">Select a subject</option>
+    <?php
+    $stmt=$conn->prepare("SELECT * FROM tblsubject");
+    $stmt->execute(); //this selects all record in tblsubject
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
+    {
+      echo('<option value='.$row["Subjectid"].'>'.$row["Subjectname"].'</option>');//this prints them as options
+    }
+    ?>
+  </select><br>
+  <input type="Submit" value="Assign">
+</form>
+<form id="tutorgroup" action="tutorgroupscript.php" method="post" style="">
+  Tutor group:<input type="text" name="tutorgroupid"><br>
+  Tutor:<select name="userid">
+    <option value="null">Select a tutor</option>
+    <?php
+    include_once("connection.php");
+    $stmt=$conn->prepare("SELECT * FROM tblusers WHERE Privilege=1");
+    $stmt->execute(); //this selects all records of teachers in tblusers
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
+    {
+      echo('<option value='.$row["Userid"].'>'.$row["Firstname"].' '.$row["Surname"].'</option>');//this prints them as options
+    }
+    ?>
+    </select><br>
+  Pupil:<select name="pupilid">
+    <option value="null">Select a pupil</option>
+    <?php
+    include_once("connection.php");
+    $stmt=$conn->prepare("SELECT * FROM tblpupil");
+    $stmt->execute(); //this selects all record in tblpupil
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
+    {
+      echo('<option value='.$row["Pupilid"].'>'.$row["Firstname"].' '.$row["Surname"].'</option>');//this prints them as options
     }
     ?>
   </select><br>
