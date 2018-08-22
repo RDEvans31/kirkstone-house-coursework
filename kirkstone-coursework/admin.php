@@ -26,7 +26,7 @@
     <a class="navbar-brand" href="http://www.kirkstonehouseschool.co.uk/page/default.asp">KHS</a>
 </nav>
 <div class="jumbotron text-center">
-  <h1>Welcome *insert user in here**</h1>
+  <h1>Welcome *insert user in here*</h1>
 <!--these divs simply seperate the forms-->
   <div id="subjectforms">
     <p class="pull-left">Subjects:</p>
