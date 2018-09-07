@@ -2,6 +2,7 @@
 <head>
   <title>Admin</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css"> <!--this connects ot bootstrap.css through a CDN-->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><!--connects to bootstrap.min.js through CDN-->
   <style>
   .jumbotron {
     background-color: #444444;
@@ -18,10 +19,10 @@
   <h1>Welcome *insert user in here*</h1>
 <!--these divs simply seperate the forms-->
   <div id="subjectforms" class="row">
-    <p class="pull-left">Subjects:</p>
-    <button type="button" class="btn btn-info pull-right" data-toggle="collapse" data-target="#addingsubject">Add</button>
-    <button type="button" class="btn btn-info pull-right" data-toggle="collapse" data-target="#teachersubject">Assign teacher</button>
-    <button type="button" class="btn btn-info pull-right" data-toggle="collapse" data-target="#pupilsubject">Assign pupil</button><br>
+    <p class="">Subjects:</p>
+    <button type="button" class="btn btn-info " data-toggle="collapse" data-target="#addingsubject">Add</button>
+    <button type="button" class="btn btn-info " data-toggle="collapse" data-target="#teachersubject">Assign teacher</button>
+    <button type="button" class="btn btn-info " data-toggle="collapse" data-target="#pupilsubject">Assign pupil</button><br>
     <div id="addingsubject" class="collapse">
       <form action="addsubjectscript.php" method="post">
         <!--This form is for adding a new subject to tblsubject, it sends the these variables to addsubjectscript.php-->
@@ -94,8 +95,8 @@
   </div>
   <br>
   <div id="userforms" class="row">
-    <p class="pull-left">Users:</p>
-    <button type="button" class="btn btn-info pull-right" data-toggle="collapse" data-target="#addinguser">Add</button>
+    <p class="">Users:</p>
+    <button type="button" class="btn btn-info " data-toggle="collapse" data-target="#addinguser">Add</button>
     <div id="addinguser" class="collapse">
     <form action="adduserscript.php" method="post">
       <!--This is for adding a new user to tbluser -->
@@ -110,8 +111,8 @@
   </div>
   <br>
   <div id="pupilforms" class="row">
-    <p class="pull-left">Pupils:</p>
-    <button type="button" class="btn btn-info pull-right" data-toggle="collapse" data-target="#addingpupil">Add</button><br>
+    <p class="">Pupils:</p>
+    <button type="button" class="btn btn-info " data-toggle="collapse" data-target="#addingpupil">Add</button><br>
     <div id="addingpupil" class="collapse">
     <form action="addpupilscript.php" method="post">
       <!-- this is for adding a new pupil to tblpupil-->
@@ -132,8 +133,8 @@
   </div>
   <br>
   <div id="tutorgroupforms">
-    <p class="pull-left">Tutor groups:</p>
-    <button type="button" class="btn btn-info pull-right" onclick="showform('tutorgroup')">Assign</button><br>
+    <p class="">Tutor groups:</p>
+    <button type="button" class="btn btn-info " onclick="showform('tutorgroup')">Assign</button><br>
     <div id="tutorgroup" class="collapse">
     <form action="tutorgroupscript.php" method="post">
       Tutor group:<input type="text" name="tutorgroupid"><br>
