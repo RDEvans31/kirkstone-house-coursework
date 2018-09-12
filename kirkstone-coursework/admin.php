@@ -1,8 +1,11 @@
 <html lang="en" > <!--this declares english language as the primary -->
 <head>
   <title>Admin</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css"> <!--this connects ot bootstrap.css through a CDN-->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><!--connects to bootstrap.min.js through CDN-->
+  <!--these connec to bootstrap through a cdn-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <style>
   .jumbotron {
     background-color: #444444;
@@ -13,16 +16,41 @@
 <body>
 <?php include_once("connection.php"); ?>
 <nav class="navbar">
-    <a class="navbar-brand" href="http://www.kirkstonehouseschool.co.uk/page/default.asp">KHS</a>
+<div class="container-fluid">
+
+ <div class="navbar-header"><a class="navbar-brand" href="http://www.kirkstonehouseschool.co.uk/page/default.asp">KHS</a></div>
+
+<ul class="nav navbar-nav">
+  <li class="dropdown"><a class="dropdown-toggle" id="subjectsDropdown" role="button" data-toggle="dropdown">Subjects</a><!--this is the dropdown menu title-->
+    <ul class="dropdown-menu"><!--this is adds options to the dropdown menu-->
+      <li><a class="nav-link" data-toggle="collapse" data-target="#addingsubject">Add</a></li>
+      <li><a class="nav-link" data-toggle="collapse" data-target="#teachersubject">Assign teacher</a></li>
+      <li><a class="nav-link" data-toggle="collapse" data-target="#pupilsubject">Assign pupil</a></li>
+    </ul>
+  </li>
+  <li class="dropdown"><a class="dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown">Users</a>
+    <ul class="dropdown-menu"><!--this is adds options to the dropdown menu-->
+      <li><a class="nav-link" data-toggle="collapse" data-target="#addinguser">Add</a></li>
+    </ul>
+  </li>
+  <li class="dropdown"><a class="dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown">Pupil</a>
+    <ul class="dropdown-menu"><!--this is adds options to the dropdown menu-->
+      <li><a class="nav-link" data-toggle="collapse" data-target="#addingpupil">Add</a></li>
+    </ul>
+  </li>
+  <li class="dropdown"><a class="dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown">Tutor Groups</a>
+    <ul class="dropdown-menu"><!--this is adds options to the dropdown menu-->
+      <li><a class="nav-link" data-toggle="collapse" data-target="#tutorgroup">Assign</a></li>
+    </ul>
+  </li>
+</ul>
+
+</div>
 </nav>
 <div class="jumbotron text-center">
   <h1>Welcome *insert user in here*</h1>
 <!--these divs simply seperate the forms-->
   <div id="subjectforms" class="row">
-    <p class="">Subjects:</p>
-    <button type="button" class="btn btn-info " data-toggle="collapse" data-target="#addingsubject">Add</button>
-    <button type="button" class="btn btn-info " data-toggle="collapse" data-target="#teachersubject">Assign teacher</button>
-    <button type="button" class="btn btn-info " data-toggle="collapse" data-target="#pupilsubject">Assign pupil</button><br>
     <div id="addingsubject" class="collapse">
       <form action="addsubjectscript.php" method="post">
         <!--This form is for adding a new subject to tblsubject, it sends the these variables to addsubjectscript.php-->
@@ -95,8 +123,7 @@
   </div>
   <br>
   <div id="userforms" class="row">
-    <p class="">Users:</p>
-    <button type="button" class="btn btn-info " data-toggle="collapse" data-target="#addinguser">Add</button>
+
     <div id="addinguser" class="collapse">
     <form action="adduserscript.php" method="post">
       <!--This is for adding a new user to tbluser -->
@@ -107,12 +134,10 @@
       Privilege:<input type="radio" name="privilege" value=0>Admin<input type="radio" name="privilege" value=1>Teacher<br>
       <input class="btn" type="Submit" value="Add">
     </form>
-  </div>
+    </div>
   </div>
   <br>
   <div id="pupilforms" class="row">
-    <p class="">Pupils:</p>
-    <button type="button" class="btn btn-info " data-toggle="collapse" data-target="#addingpupil">Add</button><br>
     <div id="addingpupil" class="collapse">
     <form action="addpupilscript.php" method="post">
       <!-- this is for adding a new pupil to tblpupil-->
@@ -132,9 +157,7 @@
     </div>
   </div>
   <br>
-  <div id="tutorgroupforms">
-    <p class="">Tutor groups:</p>
-    <button type="button" class="btn btn-info " onclick="showform('tutorgroup')">Assign</button><br>
+  <div id="tutorgroupforms" class="row">
     <div id="tutorgroup" class="collapse">
     <form action="tutorgroupscript.php" method="post">
       Tutor group:<input type="text" name="tutorgroupid"><br>
