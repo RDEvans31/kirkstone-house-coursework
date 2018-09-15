@@ -3,7 +3,7 @@
   <title>Admin</title>
   <!--these connec to bootstrap through a cdn-->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <style>
@@ -15,10 +15,20 @@
 </head>
 <body>
 <?php include_once("connection.php"); ?>
-<nav class="navbar">
+<script>
+$(document).ready(function(){
+  $("a").click(function(){ //already tried $(".nav-link")
+    //$(".form-table").hide("fast");
+    var datatarget = this.attr("data-target");
+    //$("#" + datatarget).show("fast");*/
+    alert(datatarget);
+  });
+});
+</script>
+
 <div class="container-fluid">
 
- <div class="navbar-header"><a class="navbar-brand" href="http://www.kirkstonehouseschool.co.uk/page/default.asp">KHS</a></div>
+ <div class="navbar-header"><a class="navbar-brand" href="http://www.kirkstonehouseschool.co.uk/">KHS</a></div>
 
 <ul class="nav navbar-nav">
   <li class="dropdown"><a class="dropdown-toggle" id="subjectsDropdown" role="button" data-toggle="dropdown">Subjects</a><!--this is the dropdown menu title-->
@@ -50,7 +60,7 @@
 <div class="jumbotron text-center">
   <h1>Welcome *insert user in here*</h1>
 <!--these divs simply seperate the forms-->
-  <div id="subjectforms" class="row">
+  <div id="subjectforms" class="row form-table">
     <div id="addingsubject" class="collapse">
       <form action="addsubjectscript.php" method="post">
         <!--This form is for adding a new subject to tblsubject, it sends the these variables to addsubjectscript.php-->
@@ -122,7 +132,7 @@
     </div>
   </div>
   <br>
-  <div id="userforms" class="row">
+  <div id="userforms" class="row form-table">
 
     <div id="addinguser" class="collapse">
     <form action="adduserscript.php" method="post">
@@ -137,7 +147,7 @@
     </div>
   </div>
   <br>
-  <div id="pupilforms" class="row">
+  <div id="pupilforms" class="row form-table">
     <div id="addingpupil" class="collapse">
     <form action="addpupilscript.php" method="post">
       <!-- this is for adding a new pupil to tblpupil-->
@@ -157,7 +167,7 @@
     </div>
   </div>
   <br>
-  <div id="tutorgroupforms" class="row">
+  <div id="tutorgroupforms" class="row form-table">
     <div id="tutorgroup" class="collapse">
     <form action="tutorgroupscript.php" method="post">
       Tutor group:<input type="text" name="tutorgroupid"><br>
