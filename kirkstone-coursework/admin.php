@@ -25,7 +25,7 @@ $(document).ready(function(){
   });
 });
 </script>
-
+<nav class="navabar">
 <div class="container-fluid">
 
  <div class="navbar-header"><a class="navbar-brand" href="http://www.kirkstonehouseschool.co.uk/">KHS</a></div>
