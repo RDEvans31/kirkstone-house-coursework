@@ -43,12 +43,12 @@ $(document).ready(function(){
       <li><a class="nav-link" data-toggle="collapse" data-target="#addinguser">Add</a></li>
     </ul>
   </li>
-  <li class="dropdown"><a class="dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown">Pupil</a>
+  <li class="dropdown"><a class="dropdown-toggle" id="pupilDropdown" role="button" data-toggle="dropdown">Pupil</a>
     <ul class="dropdown-menu"><!--this is adds options to the dropdown menu-->
       <li><a class="nav-link" data-toggle="collapse" data-target="#addingpupil">Add</a></li>
     </ul>
   </li>
-  <li class="dropdown"><a class="dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown">Tutor Groups</a>
+  <li class="dropdown"><a class="dropdown-toggle" id="tutorDropdown" role="button" data-toggle="dropdown">Tutor Groups</a>
     <ul class="dropdown-menu"><!--this is adds options to the dropdown menu-->
       <li><a class="nav-link" data-toggle="collapse" data-target="#tutorgroup">Assign</a></li>
     </ul>
