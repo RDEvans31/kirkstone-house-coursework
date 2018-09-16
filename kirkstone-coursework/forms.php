@@ -1,17 +1,6 @@
 <html>
 <head>
 </head>
-<script>
-funtion showform() {
-  var form=document.getElementById('subjectform');
-  if (form.style.display==="none"){
-    form.style.display="block";
-} else {
-    form.style.display="none";
-}
-
-}
-</script>
 <body>
 <h>This page will just be for designing and testing the forms</h><br>
 
@@ -74,6 +63,8 @@ funtion showform() {
     }
     ?>
   </select><br>
+  <br>
+  Set name:<input type="text" name="setid"><br>
   <input type="Submit" value="Assign">
 </form>
 </body>

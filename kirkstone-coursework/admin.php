@@ -17,12 +17,12 @@
 <?php include_once("connection.php"); ?>
 <script>
 $(document).ready(function(){
-  $("a").click(function(){ //already tried $(".nav-link")//what this should do is hide any other visible forms, but show the one that is being targeted by the button
+/*  $("a").click(function(){ //already tried $(".nav-link")//what this should do is hide any other visible forms, but show the one that is being targeted by the button
     $(".form-table").hide("fast"); //this should hide all the elements that the button does not target
     var datatarget = this.attr("data-target"); //assigns the value of the attribute "data-target" of the element that called the function to the varibale datatarget
     $("#" + datatarget).show("fast");//this should show the element that is being targeted by the button
     alert(datatarget);//this is to see if the data-target is being picked up
-  });
+  }); */
 });
 </script>
 <nav class="navabar">
@@ -96,6 +96,8 @@ $(document).ready(function(){
           }
           ?>
         </select><br>
+        <br>
+        Set name:<input type="text" name="setid"><br>
         <input class="btn" type="Submit" value="Assign">
       </form>
     </div>
