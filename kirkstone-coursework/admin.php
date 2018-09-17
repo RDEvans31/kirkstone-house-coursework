@@ -129,6 +129,8 @@ $(document).ready(function(){
           }
           ?>
         </select><br>
+        <br>
+        Set name:<input type="text" name="setid"><br>
         <input class="btn" type="Submit" value="Assign">
     </form>
     </div>

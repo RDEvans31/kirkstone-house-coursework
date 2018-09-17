@@ -37,7 +37,7 @@
   Score:<input type="text" name="MScore"><br>
   <input type="submit" value="Add"><br>
 </form>
-<form id="teachersubject" action="teachersubjectscript.php" method="post" style="">
+<form id="teachersubject" action="teachersubjectscript.php" method="post" style="display:none">
   <!--this essentially assigns a teacher to a subject using the userid and subjectid keys-->
   Teacher:<select name="userid">
     <option value="null">Select a teacher</option>
@@ -66,6 +66,36 @@
   <br>
   Set name:<input type="text" name="setid"><br>
   <input type="Submit" value="Assign">
+</form>
+<div id="pupilsubject" class="collapse">
+  <form action="pupilsubjectscript.php" method="post">
+
+    Pupil:<select name="pupilid">
+      <option value="null">Select a pupil</option>
+      <?php
+      $stmt=$conn->prepare("SELECT * FROM tblpupil");
+      $stmt->execute(); //this selects all record in tblpupil
+
+      while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
+      {
+        echo('<option value='.$row["Pupilid"].'>'.$row["Firstname"].' '.$row["Surname"].'</option>');//this prints them as options
+      }
+      ?>
+    </select><br>
+    <br>
+    Subject:<select name="subjectid">
+      <option value="null">Select a subject</option>
+      <?php
+      $stmt=$conn->prepare("SELECT * FROM tblsubject");
+      $stmt->execute(); //this selects all record in tblsubject
+      while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
+      {
+        echo('<option value='.$row["Subjectid"].'>'.$row["Subjectname"].'</option>');//this prints them as options
+      }
+      ?>
+    </select><br>
+    Set name:<input type="text" name="setid"><br>
+    <input class="btn" type="Submit" value="Assign">
 </form>
 </body>
 </html>
