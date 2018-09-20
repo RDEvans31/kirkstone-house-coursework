@@ -99,6 +99,23 @@
     <input class="btn" type="Submit" value="Assign">
 </form>
 </div>
+
+<form id=createtutorgroup action="createtutorgroup.php" method="post">
+  Tutorgroup:<input type="text" name="tutorgroupid"><br>
+  Tutor:<select name="userid">
+    <option value="null">Select a tutor</option>
+    <?php
+    $stmt=$conn->prepare("SELECT * FROM tbluser WHERE Privilege=1");
+    $stmt->execute(); //this selects all record in tblpupil
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
+    {
+      echo('<option value='.$row["Userid"].'>'.$row["Firstname"].' '.$row["Surname"].'</option>');//this prints them as options
+    }
+    ?>
+  </select><br>
+  <button type="submit" class="btn btn-default">Create</button>
+</form>
+
 <form id=pupiltutorgroup action="addpupiltotutorgroup.php" method="post">
   Tutorgroup:
   <select name="tutorgroupid">
@@ -123,7 +140,7 @@
     }
     ?>
   </select><br>
-  <input class="btn" type="Submit" value="Assign">
+  <button type="submit" class="btn btn-default">Assign</button>
 </form>
 </body>
 </html>

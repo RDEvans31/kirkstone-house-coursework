@@ -9,8 +9,6 @@
   $stmt->execute(); //executes the SQL with said contents
   $conn=null;
   echo("Data transfer successful");
-
-
 ?>
 </body>
 </html>

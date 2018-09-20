@@ -176,7 +176,7 @@
             }
             ?>
           </select><br>
-        <input type="Submit" value="Create">
+        <input type="Submit" value="Create"><br>
       </form>
     </div>
   </div>
