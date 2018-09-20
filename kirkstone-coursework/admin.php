@@ -15,17 +15,7 @@
 </head>
 <body>
 <?php include_once("connection.php"); ?>
-<script>
-$(document).ready(function(){
-/*  $("a").click(function(){ //already tried $(".nav-link")//what this should do is hide any other visible forms, but show the one that is being targeted by the button
-    $(".form-table").hide("fast"); //this should hide all the elements that the button does not target
-    var datatarget = this.attr("data-target"); //assigns the value of the attribute "data-target" of the element that called the function to the varibale datatarget
-    $("#" + datatarget).show("fast");//this should show the element that is being targeted by the button
-    alert(datatarget);//this is to see if the data-target is being picked up
-  }); */
-});
-</script>
-<nav class="navabar">
+<nav class="navbar">
 <div class="container-fluid">
 
  <div class="navbar-header"><a class="navbar-brand" href="http://www.kirkstonehouseschool.co.uk/">KHS</a></div>
@@ -33,9 +23,9 @@ $(document).ready(function(){
 <ul class="nav navbar-nav">
   <li class="dropdown"><a class="dropdown-toggle" id="subjectsDropdown" role="button" data-toggle="dropdown">Subjects</a><!--this is the dropdown menu title-->
     <ul class="dropdown-menu"><!--this is adds options to the dropdown menu-->
-      <li><a class="nav-link" data-toggle="collapse" data-target="#addingsubject">Add</a></li>
-      <li><a class="nav-link" data-toggle="collapse" data-target="#teachersubject">Assign teacher</a></li>
-      <li><a class="nav-link" data-toggle="collapse" data-target="#pupilsubject">Assign pupil</a></li>
+      <li><a class="nav-link" data-toggle="collapse" data-target="#addingsubject" data-parent="#subjectforms">Add</a></li>
+      <li><a class="nav-link" data-toggle="collapse" data-target="#teachersubject" data-parent="#subjectforms">Assign teacher</a></li>
+      <li><a class="nav-link" data-toggle="collapse" data-target="#pupilsubject" data-parent="#subjectforms">Assign pupil</a></li>
     </ul>
   </li>
   <li class="dropdown"><a class="dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown">Users</a>
@@ -60,8 +50,8 @@ $(document).ready(function(){
 <div class="jumbotron text-center">
   <h1>Welcome *insert user in here*</h1>
 <!--these divs simply seperate the forms-->
-  <div id="subjectforms" class="row form-table">
-    <div id="addingsubject" class="collapse">
+  <div id="subjectforms" class="row">
+    <div id="addingsubject">
       <form action="addsubjectscript.php" method="post">
         <!--This form is for adding a new subject to tblsubject, it sends the these variables to addsubjectscript.php-->
         Subject:<input type="text" name="subjectname"><br>
@@ -70,7 +60,7 @@ $(document).ready(function(){
       </form>
     </div>
 
-    <div id="teachersubject" class="collapse">
+    <div id="teachersubject" class="">
       <form action="teachersubjectscript.php" method="post">
         <!--this essentially assigns a teacher to a subject using the userid and subjectid keys-->
         Teacher:<select name="userid">
@@ -102,7 +92,7 @@ $(document).ready(function(){
       </form>
     </div>
 
-    <div id="pupilsubject" class="collapse">
+    <div id="pupilsubject" class="">
       <form action="pupilsubjectscript.php" method="post">
 
         Pupil:<select name="pupilid">
@@ -138,7 +128,7 @@ $(document).ready(function(){
   <br>
   <div id="userforms" class="row form-table">
 
-    <div id="addinguser" class="collapse">
+    <div id="addinguser" class="">
     <form action="adduserscript.php" method="post">
       <!--This is for adding a new user to tbluser -->
       First name:<input type="text" name="firstname"><br>
@@ -152,7 +142,7 @@ $(document).ready(function(){
   </div>
   <br>
   <div id="pupilforms" class="row form-table">
-    <div id="addingpupil" class="collapse">
+    <div id="addingpupil" class="">
     <form action="addpupilscript.php" method="post">
       <!-- this is for adding a new pupil to tblpupil-->
       First name:<input type="text" name="pupilfirstname"><br>
@@ -172,33 +162,22 @@ $(document).ready(function(){
   </div>
   <br>
   <div id="tutorgroupforms" class="row form-table">
-    <div id="tutorgroup" class="collapse">
-    <form action="tutorgroupscript.php" method="post">
-      Tutor group:<input type="text" name="tutorgroupid"><br>
-      Tutor:<select name="userid">
-        <option value="null">Select a tutor</option>
-        <?php
-        $stmt=$conn->prepare("SELECT * FROM tblusers WHERE Privilege=1");
-        $stmt->execute(); //this selects all records of teachers in tblusers
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
-        {
-          echo('<option value='.$row["Userid"].'>'.$row["Firstname"].' '.$row["Surname"].'</option>');//this prints them as options
-        }
-        ?>
-        </select><br>
-      Pupil:<select name="pupilid">
-        <option value="null">Select a pupil</option>
-        <?php
-        $stmt=$conn->prepare("SELECT * FROM tblpupil");
-        $stmt->execute(); //this selects all record in tblpupil
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
-        {
-          echo('<option value='.$row["Pupilid"].'>'.$row["Firstname"].' '.$row["Surname"].'</option>');//this prints them as options
-        }
-        ?>
-      </select><br>
-      <input class="btn" type="Submit" value="Assign">
-    </form>
+    <div id="tutorgroup" class="row">
+      <form id=createtutorgroup action="createtutorgroup.php" method="post"> <!--this allows the admin to input a tutor group id and select a teacher in charge of the tutor group-->
+        Tutorgroup:<input type="text" name="tutorgroupid"><br>
+        Tutor:<select name="userid">
+            <option value="null">Select a teacher</option>
+            <?php
+            $stmt=$conn->prepare("SELECT * FROM tbluser WHERE Privilege=1");
+            $stmt->execute(); //this selects all records in tbluser
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
+            {
+              echo('<option value='.$row["Userid"].'>'.$row["Firstname"].' '.$row["Surname"].'</option>');//this allows the admin to select a teacher
+            }
+            ?>
+          </select><br>
+        <input type="Submit" value="Create">
+      </form>
     </div>
   </div>
 </div>

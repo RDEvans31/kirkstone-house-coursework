@@ -23,7 +23,11 @@
 
 </nav>
 <div class="jumbotron text-center">
-  <h1>Welcome *insert user in here*</h1>
+  <h1>Welcome</h1>
+<div id="tutorgroup"><!--this will display the tutor group of the teacher that has logged in-->
+
+
+</div>
 </div>
 </body>
 </html>

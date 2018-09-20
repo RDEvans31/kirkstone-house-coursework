@@ -3,6 +3,7 @@
 </head>
 <body>
 <h>This page will just be for designing and testing the forms</h><br>
+<?php include_once("connection.php"); ?>
 
 <form id="addingsubject" action="addsubjectscript.php" method="post" style="display:none;">
   <!--This form is for adding a new subject to tblsubject, it sends the these variables to addsubjectscript.php-->
@@ -68,7 +69,7 @@
   <input type="Submit" value="Assign">
 </form>
 <div id="pupilsubject" class="collapse">
-  <form action="pupilsubjectscript.php" method="post">
+  <form action="pupilsubjectscript.php" method="post" style="display:none">
 
     Pupil:<select name="pupilid">
       <option value="null">Select a pupil</option>
@@ -96,6 +97,33 @@
     </select><br>
     Set name:<input type="text" name="setid"><br>
     <input class="btn" type="Submit" value="Assign">
+</form>
+</div>
+<form id=pupiltutorgroup action="addpupiltotutorgroup.php" method="post">
+  Tutorgroup:
+  <select name="tutorgroupid">
+    <option value="null">Select a tutor group</option>
+    <?php
+    $stmt=$conn->prepare("SELECT * FROM tbltutorgroup");
+    $stmt->execute(); //this selects all record in tbltutorgroup
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
+    {
+      echo('<option value='.$row["Tutorgroupid"].'>'.$row["Tutorgroupid"].'</option>');//this prints them as options
+    }
+    ?>
+  </select><br>
+  Pupil:<select name="pupilid">
+    <option value="null">Select a pupil</option>
+    <?php
+    $stmt=$conn->prepare("SELECT * FROM tblpupil");
+    $stmt->execute(); //this selects all record in tblpupil
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
+    {
+      echo('<option value='.$row["Pupilid"].'>'.$row["Firstname"].' '.$row["Surname"].'</option>');//this prints them as options
+    }
+    ?>
+  </select><br>
+  <input class="btn" type="Submit" value="Assign">
 </form>
 </body>
 </html>
