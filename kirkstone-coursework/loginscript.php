@@ -5,7 +5,7 @@
 <?php
 session_start();
 include_once("connection.php");
-$stmt=$conn->prepare("SELECT * FROM tbluser"); //this selects all records in tbluser
+$stmt=$conn->prepare("SELECT * FROM tblusers"); //this selects all records in tbluser
 $stmt->execute();
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { //this loops through the table and accesses each record
 
@@ -13,11 +13,13 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { //this loops through the table a
     if ($_POST["password"]==$row["Password"]) { //this checks the password
       switch ($row["Privilege"]) {
         case '0':
-
-          break;
+        header("Location:admin.php");
+        break;
         case '1':
+        header("Location:teacher.php");
+        $_SESSION["userid"]=$row["Userid"];
 
-          break;
+        break;
       }
 
       $message="accepted";

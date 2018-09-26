@@ -5,7 +5,7 @@
 <h>This page will just be for designing and testing the forms</h><br>
 <?php include_once("connection.php"); ?>
 
-<form id="addingsubject" action="addsubjectscript.php" method="post" style="display:none;">
+<form id="addingsubject" action="addsubjectscript.php" method="post" >
   <!--This form is for adding a new subject to tblsubject, it sends the these variables to addsubjectscript.php-->
   Subject:<input type="text" name="subjectname"><br>
   Content:<input type="text" name="subjectcontents"><br>
@@ -13,7 +13,7 @@
 </form>
 
 
-<form id="addinguser" action="adduserscript.php" method="post" style="display:none;">
+<form id="addinguser" action="adduserscript.php" method="post" >
   <!--This is for adding a new user to tbluser -->
   First name:<input type="text" name="firstname"><br>
   Surname: <input type="text" name="surname"><br>
@@ -23,7 +23,7 @@
   <input type="Submit" value="Add">
 </form>
 <br>
-<form id="addingpupil" action="addpupilscript.php" method="post" style="display:none;">
+<form id="addingpupil" action="addpupilscript.php" method="post" >
   <!-- this is for adding a new pupil to tblpupil-->
   First name:<input type="text" name="pupilfirstname"><br>
   Surname: <input type="text" name="pupilsurname"><br>
@@ -38,7 +38,7 @@
   Score:<input type="text" name="MScore"><br>
   <input type="submit" value="Add"><br>
 </form>
-<form id="teachersubject" action="teachersubjectscript.php" method="post" style="display:none">
+<form id="teachersubject" action="teachersubjectscript.php" method="post">
   <!--this essentially assigns a teacher to a subject using the userid and subjectid keys-->
   Teacher:<select name="userid">
     <option value="null">Select a teacher</option>
@@ -65,7 +65,7 @@
     ?>
   </select><br>
   <br>
-  Set name:<input type="text" name="setid"><br>
+  Set name:<input type="text" name="setname"><br>
   <input type="Submit" value="Assign">
 </form>
 <div id="pupilsubject" class="collapse">
@@ -95,7 +95,6 @@
       }
       ?>
     </select><br>
-    Set name:<input type="text" name="setid"><br>
     <input class="btn" type="Submit" value="Assign">
 </form>
 </div>
@@ -105,7 +104,7 @@
   Tutor:<select name="userid">
     <option value="null">Select a tutor</option>
     <?php
-    $stmt=$conn->prepare("SELECT * FROM tbluser WHERE Privilege=1");
+    $stmt=$conn->prepare("SELECT * FROM tblusers WHERE Privilege=1");
     $stmt->execute(); //this selects all record in tblpupil
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
     {

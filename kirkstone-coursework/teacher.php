@@ -14,7 +14,10 @@
   </style>
 </head>
 <body>
-<?php include_once("connection.php"); ?>
+<?php
+include_once("connection.php");
+session_start();
+ ?>
 <nav class="navabar">
 <div class="container-fluid">
 
@@ -25,7 +28,10 @@
 <div class="jumbotron text-center">
   <h1>Welcome</h1>
 <div id="tutorgroup"><!--this will display the tutor group of the teacher that has logged in-->
+  <?php
 
+
+   ?>
 
 </div>
 </div>
