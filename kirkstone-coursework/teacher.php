@@ -29,8 +29,31 @@ session_start();
   <h1>Welcome</h1>
 <div id="tutorgroup"><!--this will display the tutor group of the teacher that has logged in-->
   <?php
+  $userid=$_SESSION["userid"];
+  $pupilids=array();
+  $stmt=$conn->prepare("SELECT * FROM tbltutorgroup WHERE Userid='$userid'");
+  $stmt->execute();
+  while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    $tutorgroup=$row["Tutorgroupid"];
+  }
+  $stmt=$conn->prepare("SELECT * FROM tbltutorpupil WHERE Tutorgroupid='$tutorgroup'");
+  $stmt->execute();
+  while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    if ($row["Tutorgroupidid"]=$tutorgroup) {
+      array_push($pupilids,$row["Pupilid"]);
+    }
+  }
+  echo("Tutorgroup: ".$tutorgroup);
+  echo "<ul>";
+  foreach ($pupilids as $x) {
+    $stmt=$conn->prepare("SELECT Surname,Firstname FROM tblpupil WHERE Pupilid='$x'");
+    $stmt->execute();
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+      echo ("<li>".$row["Firstname"].' '.$row["Surname"]."</li>");
+      }
+  }
 
-
+  echo "</ul>"
    ?>
 
 </div>

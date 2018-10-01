@@ -68,7 +68,7 @@
   Set name:<input type="text" name="setname"><br>
   <input type="Submit" value="Assign">
 </form>
-<div id="pupilsubject" class="collapse">
+<div id="pupilsubject">
   <form action="pupilsubjectscript.php" method="post" style="display:none">
 
     Pupil:<select name="pupilid">
@@ -141,5 +141,19 @@
   </select><br>
   <button type="submit" class="btn btn-default">Assign</button>
 </form>
+<form id=entergrades action="enetergradesscript.php">
+  Term:<select name="term">
+    <option value="null">Select a term</option>
+    <option value="aut1">Autumn 1</option>
+    <option value="aut2">Autumn 2</option>
+    <option value="spr">Spring</option>
+    <option value="sum">Summer</option>
+  </select>
+  Pupil:<select name="pupilid">
+    <option value="null">Select a pupil</option>
+    <?php
+      $stmt=$conn->prepare("SELECT * FROM tblpupil "); //needs to retreive the pupils in their set it can do this by allowing the teacher to select the set first before the form
+    ?>
+
 </body>
 </html>

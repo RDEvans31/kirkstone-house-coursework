@@ -23,14 +23,13 @@ if ($_POST["userid"]=="null" or $_POST["subjectid"]=="null") {
   $stmt->bindParam(':userid', $_POST["userid"]); //assigns the input from the form to the values that will be added to the field
   $stmt->bindParam(':subjectid', $_POST["subjectid"]);
   $stmt->execute(); //executes the SQL with said contents
-  $conn=null;
   echo("Teacher assigned to ".$subjectname);
 //this will send the relevant data to tblset to store which set was taugt by which teacher, in which year.
   $stmt2=$conn->prepare("INSERT INTO tblset(Setid,Setname,Subjectname,Year,Userid) VALUES (:setid,:name,:subject,:year,:userid)");
   $stmt2->bindParam(':setid', $setid);
   $stmt2->bindParam(':name', $setname);
   $stmt2->bindParam(':subject', $subjectname);
-  $stmt2->bindParam(':year', $year);
+  $stmt2->bindParam(':year', $Year);
   $stmt2->bindParam(':userid', $_POST["userid"]);
   $stmt2->execute();
   $conn=null;
