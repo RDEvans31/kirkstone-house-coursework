@@ -17,7 +17,7 @@
 <?php
 include_once("connection.php");
 session_start();
- ?>
+?>
 <nav class="navabar">
 <div class="container-fluid">
 

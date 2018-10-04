@@ -1,5 +1,22 @@
 <html>
 <head>
+  <script>
+        function showSets(id){
+          var xhttp;
+          if (id == "") {
+            document.getElementById("selectset").innerHTML = "<option value=''> No subject selected</option>";
+            return;
+          }
+          xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              document.getElementById("selectset").innerHTML = this.responseText;//finds the html element with id "selectset" changes the contents of that element accordingly.
+            }
+          };
+          xhttp.open("GET", "getsetsforsubject.php?subjectid="+id, true);
+          xhttp.send();
+        }
+  </script>
 </head>
 <body>
 <h>This page will just be for designing and testing the forms</h><br>
@@ -28,7 +45,6 @@
   First name:<input type="text" name="pupilfirstname"><br>
   Surname: <input type="text" name="pupilsurname"><br>
   Year: <input type="number" name="yeargroup"><br>
-  Tutor group:<input type="text" name="tutorgroup"><br>
   Date of Birth: <input type="date" name='dob'><br>
   <p>Please enter their Midyis scores below:</p>
   Vocabulary:<input type="text" name="MVocab"><br>
@@ -53,7 +69,7 @@
     ?>
   </select><br>
   <br>
-  Subject:<select name="subjectid">
+ Subject:<select name="subjectid">
     <option value="null">Select a subject</option>
     <?php
     $stmt=$conn->prepare("SELECT * FROM tblsubject");
@@ -69,10 +85,10 @@
   <input type="Submit" value="Assign">
 </form>
 <div id="pupilsubject">
-  <form action="pupilsubjectscript.php" method="post" style="display:none">
+  <form action="pupilsubjectscript.php" method="post">
 
     Pupil:<select name="pupilid">
-      <option value="null">Select a pupil</option>
+      <option value="">Select a pupil</option>
       <?php
       $stmt=$conn->prepare("SELECT * FROM tblpupil");
       $stmt->execute(); //this selects all record in tblpupil
@@ -84,8 +100,8 @@
       ?>
     </select><br>
     <br>
-    Subject:<select name="subjectid">
-      <option value="null">Select a subject</option>
+    Subject:<select name="subjectidpupil" onchange="showSets(this.value)">
+      <option value="">Select a subject</option>
       <?php
       $stmt=$conn->prepare("SELECT * FROM tblsubject");
       $stmt->execute(); //this selects all record in tblsubject
@@ -95,6 +111,8 @@
       }
       ?>
     </select><br>
+    Set:<select id="selectset" name="setidpupil"></select>
+  </br>
     <input class="btn" type="Submit" value="Assign">
 </form>
 </div>
