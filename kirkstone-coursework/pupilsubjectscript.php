@@ -12,7 +12,7 @@ if ($_POST["pupilid"]=="" or $_POST["subjectidpupil"]=="") {
   $stmt->bindParam(':setid', $_POST["setidpupil"]);
   $stmt->execute(); //executes the SQL with said contents
   $conn=null;
-  echo("Data transfer successful");
+  header("Location:formstesting.php");
 }
 
 ?>

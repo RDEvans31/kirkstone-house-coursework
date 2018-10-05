@@ -52,11 +52,39 @@ session_start();
       echo ("<li>".$row["Firstname"].' '.$row["Surname"]."</li>");
       }
   }
-
   echo "</ul>"
-   ?>
+  ?>
+</div>
+<div name="showsetstaught">
+  <?php
+    $setstaught=array();
+    $stmt=$conn->prepare("SELECT Setid FROM tblset WHERE Userid='$userid'"); //returns sets taught by teacher that logged in
+    $stmt->execute();
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+      array_push($setstaught,$row["Setid"]); //adds the set id to an array of sets taught
+    }
+    foreach ($setstaught as $x) { //loops through each set taught by teacher
+      echo("Set: ".$x);
+      $pupilsinset=array(); // initialise here because needs to be cleared and re-initiated at the end of this loop.
+      $stmt=$conn->prepare("SELECT Pupilid FROM tblpupilstudies WHERE Setid='$x'"); //fetches all the pupil id's in the set
+      $stmt->execute();
+      while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        array_push($pupilsinset,$row["Pupilid"]); //adds the pupil id's of pupils in the set to an array
+      }
+      foreach ($pupilsinset as $y) {
+        $stmt=$conn->prepare("SELECT Surname,Firstname FROM tblpupil WHERE Pupilid='$y'"); //loops through the pupils in the set, fetches their name.
+        $stmt->execute();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+          echo ("<li>".$row["Firstname"].' '.$row["Surname"]."</li>"); //prints name as list item.
+        }
+       //clears all the students in this set from array so that it can be repopulated with studetns from the next set.
+       unset($pupilsinset);
+      }
+    }
+  ?>
 
 </div>
+
 </div>
 </body>
 </html>
