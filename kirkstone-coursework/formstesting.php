@@ -13,7 +13,7 @@
               document.getElementById("selectset").innerHTML = this.responseText;//finds the html element with id "selectset" changes the contents of that element accordingly.
             }
           };
-          xhttp.open("GET", "getsetsforsubject.php?subjectid="+id, true);
+          xhttp.open("GET", "ajaxgetsetsforsubject.php?subjectid="+id, true);
           xhttp.send();
         }
   </script>

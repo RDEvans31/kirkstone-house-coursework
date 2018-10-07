@@ -11,6 +11,7 @@
     background-color: #444444;
     color: #fff;
   }
+  select {color:#000;}
   </style>
 </head>
 <body>
