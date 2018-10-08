@@ -10,10 +10,10 @@ $stmt=$conn->prepare("SELECT Pupilid FROM tblpupilstudies WHERE Setid='$setid'")
 $stmt->execute();
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
 {
- array_push($pupilsinset,$row["Pupilid"]);
+ array_push($pupilsinset,$row["Pupilid"]);//this adds the pupil id into an array
 }
 foreach ($pupilsinset as $x) {
-  $stmt=$conn->prepare("SELECT Surname,Firstname FROM tblpupil WHERE Pupilid='$x'"); //returns sets taught by teacher that logged in
+  $stmt=$conn->prepare("SELECT Surname,Firstname FROM tblpupil WHERE Pupilid='$x'"); //returns names of pupils in the set
   $stmt->execute();
   while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     echo("<option value=".$x.">".$row["Firstname"]." ".$row["Surname"]."</option>");

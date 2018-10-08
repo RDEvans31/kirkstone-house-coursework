@@ -19,7 +19,7 @@
               document.getElementById("selectpupil").innerHTML = this.responseText;
             }
           };
-          xhttp.open("GET", "ajaxpupilsinset.php?subjectid="+setid, true);
+          xhttp.open("GET", "ajaxpupilsinset.php?setid="+setid, true);
           xhttp.send();
         }
   </script>
@@ -115,10 +115,10 @@ session_start();
   Pupil: <select id="selectpupil" name="pupilid">
   </select><br>
   Term:<select name="term">
-    <option value="1">Autumn 1</option>
-    <option value="2">Autumn 2</option>
-    <option value="3">Spring</option>
-    <option value="4">Summer</option>
+    <option value="Aut1">Autumn 1</option>
+    <option value="Aut2">Autumn 2</option>
+    <option value="Spr">Spring</option>
+    <option value="Sum">Summer</option>
   </select><br>
   Effort:<input type="text"><br>
   Achieve:<input type="text"><br>
