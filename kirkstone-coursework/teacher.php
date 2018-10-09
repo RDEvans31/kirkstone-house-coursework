@@ -29,6 +29,7 @@
     color: #fff;
   }
   select {color:#000;}
+  input {color:#000;}
   </style>
 </head>
 <body>
@@ -101,8 +102,8 @@ session_start();
     }
   ?>
 <div name="entergrades">
-<form action="entergradesscript.php">
-  Set:<select onchange="showPupilsinset(this.value)">
+<form action="entergradesscript.php" method="post">
+  Set:<select onchange="showPupilsinset(this.value)" name="set">
   <option value="">Select a subject</option>
   <?php
   $stmt=$conn->prepare("SELECT Setid FROM tblset WHERE Userid='$userid'"); //returns sets taught by teacher that logged in
@@ -120,8 +121,8 @@ session_start();
     <option value="Spr">Spring</option>
     <option value="Sum">Summer</option>
   </select><br>
-  Effort:<input type="text"><br>
-  Achieve:<input type="text"><br>
+  Effort:<input type="text" name="effort"><br>
+  Achieve:<input type="text" name="achieve"><br>
   <input type="Submit" value="Assign">
 </form>
 </div>

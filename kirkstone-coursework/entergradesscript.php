@@ -3,13 +3,15 @@
 <?php
 include_once("connection.php");
 array_map("htmlspecialchars", $_POST);
-$field1
-$field2
-$stmt=$conn->prepare("UPDATE tblpupilstudies SET Aut1A,Aut1E VALUES(:achieve,:effort)");
-$stmt->bindParam(':achieve', $_POST[""]);
-$stmt->bindParam('effort:', $_POST[""]);
+$achievefield=$_POST["term"]."A";
+$effortfield=$_POST["term"]."E";
+$setid=$_POST["set"];
+$pupilid=$_POST["pupilid"];
+$stmt=$conn->prepare("UPDATE tblpupilstudies SET '$achievefield','$effortfield' VALUES (:achieve,:effort) WHERE Setid='$setid' AND Pupilid='$pupilid' ");
+$stmt->bindParam(':achieve', $_POST["achieve"]);
+$stmt->bindParam(':effort', $_POST["effort"]);
 $stmt->execute();
-
+echo "Data transfer successful";
 ?>
 </body>
 </html>
