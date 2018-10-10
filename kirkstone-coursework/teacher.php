@@ -7,7 +7,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script>
-        function showPupilsinset(setid){
+        function showPupilsinset(setid){//shows pupils in the selected set
           var xhttp;
           if (setid == "") {
             document.getElementById("selectpupil").innerHTML = "<option value=''> No pupil selected</option>";
@@ -104,7 +104,7 @@ session_start();
 <div name="entergrades">
 <form action="entergradesscript.php" method="post">
   Set:<select onchange="showPupilsinset(this.value)" name="set">
-  <option value="">Select a subject</option>
+  <option value="">Select a set</option>
   <?php
   $stmt=$conn->prepare("SELECT Setid FROM tblset WHERE Userid='$userid'"); //returns sets taught by teacher that logged in
   $stmt->execute();
@@ -121,6 +121,7 @@ session_start();
     <option value="Spr">Spring</option>
     <option value="Sum">Summer</option>
   </select><br>
+  Target:<input type="text" name="target" placeholder="fill only if neccessary"><br>
   Effort:<input type="text" name="effort"><br>
   Achieve:<input type="text" name="achieve"><br>
   <input type="Submit" value="Assign">
