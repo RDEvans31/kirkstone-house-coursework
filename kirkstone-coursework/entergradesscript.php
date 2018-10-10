@@ -7,7 +7,7 @@ $achievefield=$_POST["term"]."A";
 $effortfield=$_POST["term"]."E";
 $setid=$_POST["set"];
 $pupilid=$_POST["pupilid"];
-$stmt=$conn->prepare("UPDATE tblpupilstudies SET '$achievefield','$effortfield' VALUES (:achieve,:effort) WHERE Setid='$setid' AND Pupilid='$pupilid' ");
+$stmt=$conn->prepare("UPDATE tblpupilstudies SET $achievefield=:achieve,$effortfield=:effort  WHERE Setid='$setid' AND Pupilid='$pupilid' ");
 $stmt->bindParam(':achieve', $_POST["achieve"]);
 $stmt->bindParam(':effort', $_POST["effort"]);
 $stmt->execute();
