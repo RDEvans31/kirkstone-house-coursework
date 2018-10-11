@@ -102,32 +102,35 @@ session_start();
     }
   ?>
 <div name="entergrades">
-<form action="entergradesscript.php" method="post">
-  Set:<select onchange="showPupilsinset(this.value)" name="set">
-  <option value="">Select a set</option>
-  <?php
-  $stmt=$conn->prepare("SELECT Setid FROM tblset WHERE Userid='$userid'"); //returns sets taught by teacher that logged in
-  $stmt->execute();
-  while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-    echo("<option value=".$row["Setid"].">".$row["Setid"]."</option>");
-  }
-  ?>
-</select><br>
-  Pupil: <select id="selectpupil" name="pupilid">
-  </select><br>
-  Term:<select name="term">
-    <option value="Aut1">Autumn 1</option>
-    <option value="Aut2">Autumn 2</option>
-    <option value="Spr">Spring</option>
-    <option value="Sum">Summer</option>
-  </select><br>
-  Target:<input type="text" name="target" placeholder="fill only if neccessary"><br>
-  Effort:<input type="text" name="effort"><br>
-  Achieve:<input type="text" name="achieve"><br>
-  <input type="Submit" value="Assign">
-</form>
+  <form action="entergradesscript.php" method="post">
+    Set:<select onchange="showPupilsinset(this.value)" name="set">
+    <option value="">Select a set</option>
+    <?php
+    $stmt=$conn->prepare("SELECT Setid FROM tblset WHERE Userid='$userid'"); //returns sets taught by teacher that logged in
+    $stmt->execute();
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+      echo("<option value=".$row["Setid"].">".$row["Setid"]."</option>");
+    }
+    ?>
+    </select><br>
+    Pupil: <select id="selectpupil" name="pupilid"></select><br>
+    Term:<select name="term">
+      <option value="Aut1">Autumn 1</option>
+      <option value="Aut2">Autumn 2</option>
+      <option value="Spr1">Spring 1</option>
+      <option value="Spr2">Spring 2</option>
+      <option value="Sum1">Summer 1</option>
+      <option value="Sum2">Summer 2</option>
+    </select><br>
+    Target:<input type="text" name="target" placeholder="fill only if neccessary"><br>
+    Effort:<input type="text" name="effort"><br>
+    Achieve:<input type="text" name="achieve"><br>
+    <input type="Submit" value="Assign">
+  </form>
 </div>
-
+<div name="tutorreport">
+  <form name="tutorreportform" action="tutorreportscript.php">
+  </form>
 </div>
 </body>
 </html>
