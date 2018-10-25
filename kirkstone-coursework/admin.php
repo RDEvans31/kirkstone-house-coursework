@@ -12,6 +12,7 @@
     color: #fff;
   }
   select {color:#000;}
+  input {color:#000;}
   </style>
 </head>
 <body>
@@ -128,7 +129,6 @@
   </div>
   <br>
   <div id="userforms" class="row form-table">
-
     <div id="addinguser" class="">
     <form action="adduserscript.php" method="post">
       <!--This is for adding a new user to tbluser -->
@@ -169,7 +169,7 @@
         Tutor:<select name="userid">
             <option value="null">Select a teacher</option>
             <?php
-            $stmt=$conn->prepare("SELECT * FROM tbluser WHERE Privilege=1");
+            $stmt=$conn->prepare("SELECT * FROM tblusers WHERE Privilege=1");
             $stmt->execute(); //this selects all records in tbluser
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
             {

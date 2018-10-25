@@ -31,12 +31,13 @@
   select {color:#000;}
   input {color:#000;}
   </style>
+  <?php
+  include_once("connection.php");
+  session_start();
+  $userid=$_SESSION["userid"];
+  ?>
 </head>
 <body>
-<?php
-include_once("connection.php");
-session_start();
-?>
 <nav class="navabar">
 <div class="container-fluid">
 
@@ -48,8 +49,7 @@ session_start();
   <h1>Welcome</h1>
 <div id="tutorgroup"><!--this will display the tutor group of the teacher that has logged in-->
   <?php
-  $userid=$_SESSION["userid"];
-  $pupilids=array();
+  $pupilidsintutorgroup=array();
   $stmt=$conn->prepare("SELECT * FROM tbltutorgroup WHERE Userid='$userid'");
   $stmt->execute();
   while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -59,12 +59,12 @@ session_start();
   $stmt->execute();
   while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     if ($row["Tutorgroupidid"]=$tutorgroup) {
-      array_push($pupilids,$row["Pupilid"]);
+      array_push($pupilidsintutorgroup,$row["Pupilid"]);
     }
   }
   echo("Tutorgroup: ".$tutorgroup);
   echo "<ul>";
-  foreach ($pupilids as $x) {
+  foreach ($pupilidsintutorgroup as $x) {
     $stmt=$conn->prepare("SELECT Surname,Firstname FROM tblpupil WHERE Pupilid='$x'");
     $stmt->execute();
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -74,7 +74,7 @@ session_start();
   echo "</ul>"
   ?>
 </div>
-<div name="showsetstaught">
+<div id="showsetstaught">
   <?php
     $setstaught=array();
     $stmt=$conn->prepare("SELECT Setid FROM tblset WHERE Userid='$userid'"); //returns sets taught by teacher that logged in
@@ -101,8 +101,8 @@ session_start();
       }
     }
   ?>
-<div name="entergrades">
-  <form action="entergradesscript.php" method="post">
+<div id="entergrades">
+  <form name="entergradesform" action="entergradesscript.php" method="post">
     Set:<select onchange="showPupilsinset(this.value)" name="set">
     <option value="">Select a set</option>
     <?php
@@ -128,8 +128,24 @@ session_start();
     <input type="Submit" value="Assign">
   </form>
 </div>
-<div name="tutorreport">
-  <form name="tutorreportform" action="tutorreportscript.php">
+<div id="tutorreport">
+  <form name="tutorreportform" action="tutorreportscript.php" method="post">
+    Pupil:<select name="pupilidreport">
+      <option value="null">Select a tutee</option>
+      <<?php
+       //produces list of pupils within tutor group
+       //makes use of the varibales in tutorgroup div
+       foreach ($pupilidsintutorgroup as $x) {
+         $stmt=$conn->prepare("SELECT Surname,Firstname FROM tblpupil WHERE Pupilid='$x'");
+         $stmt->execute();
+         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+           echo ("<option value=".$x.">".$row["Firstname"].' '.$row["Surname"]."</option>");
+           }
+       }
+      ?>
+    </select><br>
+    Tutor Comments:<input type="text" name="tutorcomments"><br>
+    <input type="Submit" value="Enter">
   </form>
 </div>
 </body>
