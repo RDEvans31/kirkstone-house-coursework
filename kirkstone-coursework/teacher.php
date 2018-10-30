@@ -148,5 +148,28 @@
     <input type="Submit" value="Enter">
   </form>
 </div>
+<div id="subjectreport">
+<form id="subjectreportform" action="subjectreportscript.php" method="post">
+ Subject:<select onchange="showPupilsinsubject(this.value)" name="subject">
+   <option value="">Select a subject</option>
+   <?php
+   $subjectstaught=array();
+   $stmt=$conn->prepare("SELECT Subjectid FROM tblsubteacher WHERE Userid='$userid'"); //returns subjectid's of subjetcs taught by teacher that logged in
+   $stmt->execute();
+   while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+       array_push($subjectstaught,$row["Subjectid"]);
+   }
+   foreach ($subjectstaught as $x) {
+     $stmt=$conn->prepare("SELECT Subjectname FROM tblsubject WHERE Subjectid='$x'"); //returns subjectid's of subjetcs taught by teacher that logged in
+     $stmt->execute();
+     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+       echo("<option value=".$x.">".$row["Subjectname"]."</option>");
+     }
+    }
+   ?>
+ </select>
+ <!--the rest of the form goes here-->
+</form>
+</div>
 </body>
 </html>

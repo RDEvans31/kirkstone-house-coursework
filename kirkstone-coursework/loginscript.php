@@ -18,7 +18,10 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { //this loops through the table a
         case '1':
         header("Location:teacher.php");
         $_SESSION["userid"]=$row["Userid"];
-
+        break;
+        case '2':
+        header("Location:head.php");
+        $_SESSION["userid"]=$row["Userid"];
         break;
       }
 

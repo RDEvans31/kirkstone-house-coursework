@@ -136,7 +136,7 @@
       Surname: <input type="text" name="surname"><br>
       Username: <input type="text" name="username"><br>
       Password: <input type="password" name="password"><br>
-      Privilege:<input type="radio" name="privilege" value=0>Admin<input type="radio" name="privilege" value=1>Teacher<br>
+      Privilege:<input type="radio" name="privilege" value=0>Admin<input type="radio" name="privilege" value=1>Teacher<input type="radio" name="privilege" value=2>Head<br>
       <input class="btn" type="Submit" value="Add">
     </form>
     </div>
