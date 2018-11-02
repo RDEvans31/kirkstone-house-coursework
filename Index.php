@@ -15,7 +15,7 @@
 </head>
 <body>
 <?php
- include_once("connection.php");
+ include_once("kirkstone-coursework/connection.php");
 
 ?>
 <nav class="navabar">
@@ -26,7 +26,7 @@
 
 </nav>
 <div class="jumbotron">
-  <form id="loginform" action="loginscript.php" method="post">
+  <form id="loginform" action="kirkstone-coursework/loginscript.php" method="post">
       <div class="form-group">
         <label for="username">Username:</label>
         <input type="text" class="form-control" name="username" placeholder="Enter username">

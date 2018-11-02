@@ -1,7 +1,3 @@
-<html>
-<head>
-</head>
-<body>
 <?php
 include_once("connection.php");
 $setid = $_GET['setid'];
@@ -20,5 +16,3 @@ foreach ($pupilsinset as $x) {
   }
 }
 ?>
-</body>
-</html>

@@ -18,8 +18,8 @@
 <nav class="navabar">
 <div class="container-fluid">
 
- <div class="navbar-header"><a class="navbar-brand" href="http://www.kirkstonehouseschool.co.uk/">KHS</a></div>
-
+  <div class="navbar-header"><a class="navbar-brand" href="..\Index.php">KHS</a></div>
+  <a class="navbar-brand" href="logoutscript.php">Logout</a>
 
 </nav>
 <div class="jumbotron text-center">

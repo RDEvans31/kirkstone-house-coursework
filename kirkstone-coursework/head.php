@@ -41,13 +41,27 @@
 <nav class="navabar">
 <div class="container-fluid">
 
- <div class="navbar-header"><a class="navbar-brand" href="http://www.kirkstonehouseschool.co.uk/">KHS</a></div>
-
+ <div class="navbar-header"><a class="navbar-brand" href="..\Index.php">KHS</a></div>
+ <a class="navbar-brand" href="logoutscript.php">Logout</a>
 
 </nav>
 <div class="jumbotron text-center">
-  <h1>Welcome</h1>
-
+  <h3>Select a year group</h3>
+<div id="selectyear">
+  <form action="headcomments.php" method="post">
+    Year:<select name="Year">
+      <option value="">Select a year</option>
+      <?php
+      $stmt=$conn->prepare("SELECT DISTINCT Year FROM tblpupil ORDER BY Year ASC"); //returns subjectid's of subjetcs taught by teacher that logged in
+      $stmt->execute();
+      while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        echo("<option value=".$row["Year"].">".$row["Year"]."</option>");
+      }
+      ?>
+    </select><br>
+    <input type="Submit" value="Select">
+  </form>
+</div>
 </div>
 </body>
 </html>
