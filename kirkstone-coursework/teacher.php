@@ -2,7 +2,7 @@
 <head>
   <title>Teacher</title>
   <!--these connec to bootstrap through a cdn-->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -38,10 +38,11 @@
   ?>
 </head>
 <body>
-<nav class="navabar">
+<nav class="navbar">
 <div class="container-fluid">
   <div class="navbar-header"><a class="navbar-brand" href="..\Index.php">KHS</a></div>
-  <a class="navbar-brand" href="logoutscript.php">Logout</a>
+  <a class="nav-link" href="teachersubjectreports.php">Subject report</a>
+  <a class="navbar-link" href="logoutscript.php">Logout</a>
 </nav>
 <div class="jumbotron text-center">
   <h1>Welcome</h1>
@@ -146,28 +147,6 @@
     <input type="Submit" value="Enter">
   </form>
 </div>
-<div id="subjectreport">
-<form id="subjectreportform" action="subjectreportscript.php" method="post">
- Subject:<select onchange="showPupilsinsubject(this.value)" name="subject">
-   <option value="">Select a subject</option>
-   <?php
-   $subjectstaught=array();
-   $stmt=$conn->prepare("SELECT Subjectid FROM tblsubteacher WHERE Userid='$userid'"); //returns subjectid's of subjetcs taught by teacher that logged in
-   $stmt->execute();
-   while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-       array_push($subjectstaught,$row["Subjectid"]);
-   }
-   foreach ($subjectstaught as $x) {
-     $stmt=$conn->prepare("SELECT Subjectname FROM tblsubject WHERE Subjectid='$x'"); //returns subjectid's of subjetcs taught by teacher that logged in
-     $stmt->execute();
-     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-       echo("<option value=".$x.">".$row["Subjectname"]."</option>");
-     }
-    }
-   ?>
- </select>
- <!--the rest of the form goes here-->
-</form>
-</div>
+
 </body>
 </html>
