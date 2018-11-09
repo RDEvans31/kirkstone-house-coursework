@@ -1,10 +1,11 @@
 <html lang="en" > <!--this declares english language as the primary -->
 <head>
   <title>Admin</title>
-  <!--these connec to bootstrap through a cdn-->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <!--these connect to bootstrap through a cdn-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   <style>
   .jumbotron {
     background-color: #444444;
@@ -24,19 +25,16 @@
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
+        <a class="nav-link" href="admin.php">Admin <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Subjects
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" href="adminforms\adminaddsubject.php">Add</a>
+          <a class="dropdown-item" href="adminforms\adminassignteachertosubject.php">Assign teacher</a>
+          <a class="dropdown-item" href="adminforms\adminassignpupiltosubject.php">Assign pupil</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -44,9 +42,8 @@
           Users
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" href="adminforms\adminadduser.php">Add</a>
+          <a class="dropdown-item" href="adminforms\admincreatetutorgroup.php">Create a tutor group</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -54,27 +51,16 @@
           Pupils
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" href="adminforms\adminaddpupil.php">Add</a>
+          <a class="dropdown-item" href="adminforms\adminassignpupiltotutorgroup.php">Assign to tutor group</a>
         </div>
       </li>
     </ul>
   </div>
 </nav>
 <div class="jumbotron text-center">
-  <h1>Welcome *insert user in here*</h1>
+  <h2>Admin</h2>
 <!--these divs simply seperate the forms-->
-  <div id="subjectforms" class="row">
-    <div id="addingsubject">
-      <form action="addsubjectscript.php" method="post">
-        <!--This form is for adding a new subject to tblsubject, it sends the these variables to addsubjectscript.php-->
-        Subject:<input type="text" name="subjectname"><br>
-        Content:<input type="text" name="subjectcontents"><br>
-        <input class="btn" type="Submit" value="Add">
-      </form>
-    </div>
-
     <div id="teachersubject" class="">
       <form action="teachersubjectscript.php" method="post">
         <!--this essentially assigns a teacher to a subject using the userid and subjectid keys-->
@@ -193,6 +179,32 @@
         <input type="Submit" value="Create"><br>
       </form>
     </div>
+    <form id=pupiltutorgroup action="addpupiltotutorgroup.php" method="post">
+      Tutorgroup:
+      <select name="tutorgroupid">
+        <option value="null">Select a tutor group</option>
+        <?php
+        $stmt=$conn->prepare("SELECT * FROM tbltutorgroup");
+        $stmt->execute(); //this selects all record in tbltutorgroup
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
+        {
+          echo('<option value='.$row["Tutorgroupid"].'>'.$row["Tutorgroupid"].'</option>');//this prints them as options
+        }
+        ?>
+      </select><br>
+      Pupil:<select name="pupilid">
+        <option value="null">Select a pupil</option>
+        <?php
+        $stmt=$conn->prepare("SELECT * FROM tblpupil");
+        $stmt->execute(); //this selects all record in tblpupil
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
+        {
+          echo('<option value='.$row["Pupilid"].'>'.$row["Firstname"].' '.$row["Surname"].'</option>');//this prints them as options
+        }
+        ?>
+      </select><br>
+      <button type="submit" class="btn btn-default">Assign</button>
+    </form>
   </div>
 </div>
 </body>

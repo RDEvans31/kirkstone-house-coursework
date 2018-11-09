@@ -18,13 +18,10 @@
  include_once("kirkstone-coursework/connection.php");
 
 ?>
-<nav class="navabar">
-<div class="container-fluid">
-
- <div class="navbar-header"><a class="navbar-brand" href="http://www.kirkstonehouseschool.co.uk/">KHS</a></div>
-
-
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">KHS</a>
 </nav>
+
 <div class="jumbotron">
   <form id="loginform" action="kirkstone-coursework/loginscript.php" method="post">
       <div class="form-group">
