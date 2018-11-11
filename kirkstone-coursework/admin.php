@@ -17,7 +17,7 @@
 </head>
 <body>
 <?php include_once("connection.php"); ?>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
   <a class="navbar-brand" href="#">KHS</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -55,157 +55,113 @@
           <a class="dropdown-item" href="adminforms\adminassignpupiltotutorgroup.php">Assign to tutor group</a>
         </div>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="logoutscript.php">Logout</a>
+      </li>
     </ul>
   </div>
 </nav>
 <div class="jumbotron text-center">
-  <h2>Admin</h2>
-<!--these divs simply seperate the forms-->
-    <div id="teachersubject" class="">
-      <form action="teachersubjectscript.php" method="post">
-        <!--this essentially assigns a teacher to a subject using the userid and subjectid keys-->
-        Teacher:<select name="userid">
-          <option value="null">Select a teacher</option>
-          <?php
-          $stmt=$conn->prepare("SELECT * FROM tblusers WHERE privilege=1");
-          $stmt->execute(); //this selects all record in tblusers that have privilege 1, meaning they are a teacher
-          while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
-          {
-            echo('<option value='.$row["Userid"].'>'.$row["Firstname"].' '.$row["Surname"].'</option>');//this prints them as options
-          }
-          ?>
-        </select><br>
-        <br>
-        Subject:<select name="subjectid">
-          <option value="null">Select a subject</option>
-          <?php
-          $stmt=$conn->prepare("SELECT * FROM tblsubject");
-          $stmt->execute(); //this selects all record in tblsubject
-          while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
-          {
-            echo('<option value='.$row["Subjectid"].'>'.$row["Subjectname"].'</option>');//this prints them as options
-          }
-          ?>
-        </select><br>
-        <br>
-        Set name:<input type="text" name="setid"><br>
-        <input class="btn" type="Submit" value="Assign">
-      </form>
-    </div>
+<h2>Admin</h2>
 
-    <div id="pupilsubject" class="">
-      <form action="pupilsubjectscript.php" method="post">
+<h3>Users:<h3>
+<table class="table table-dark table-bordered table-striped">
+    <caption>List of users</caption>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First name</th>
+      <th scope="col">Last name</th>
+      <th scope="col">Username</th>
+      <th scope="col">Password</th>
+      <th scope="col">Privilege</th>
+      <th scope="col">Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php
+    $stmt=$conn->prepare("SELECT * FROM tblusers");//this selects all sets that are associated with the subject selected.
+    $stmt->execute();
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+      switch ($row["Privilege"]) {
+        case 0:
+          $type="Admin";
+          break;
+        case 1:
+          $type="User";
+          break;
+        case 2:
+          $type="Head";
+          break;
+      }
+      echo('<tr>
+        <th scope="row">'.$row["Userid"].'</th>
+        <td>'.$row["Firstname"].'</td>
+        <td>'.$row["Surname"].'</td>
+        <td>'.$row["Username"].'</td>
+        <td>'.$row["Password"].'</td>
+        <td>'.$row["Privilege"].'</td>
+        <td>'.$type.'</td>
+      </tr>');
+    }
+    ?>
+  </tbody>
+</table>
+<h3>Pupils:</h3>
+<table class="table table-dark table-bordered table-striped">
+    <caption>List of pupils</caption>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First name</th>
+      <th scope="col">Last name</th>
+      <th scope="col">Year group</th>
+      <th scope="col">Date Of Birth</th>
+      <th scope="col">Midyis Score</th>
 
-        Pupil:<select name="pupilid">
-          <option value="null">Select a pupil</option>
-          <?php
-          $stmt=$conn->prepare("SELECT * FROM tblpupil");
-          $stmt->execute(); //this selects all record in tblpupil
-
-          while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
-          {
-            echo('<option value='.$row["Pupilid"].'>'.$row["Firstname"].' '.$row["Surname"].'</option>');//this prints them as options
-          }
-          ?>
-        </select><br>
-        <br>
-        Subject:<select name="subjectid">
-          <option value="null">Select a subject</option>
-          <?php
-          $stmt=$conn->prepare("SELECT * FROM tblsubject");
-          $stmt->execute(); //this selects all record in tblsubject
-          while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
-          {
-            echo('<option value='.$row["Subjectid"].'>'.$row["Subjectname"].'</option>');//this prints them as options
-          }
-          ?>
-        </select><br>
-        <br>
-        Set name:<input type="text" name="setid"><br>
-        <input class="btn" type="Submit" value="Assign">
-    </form>
-    </div>
-  </div>
-  <br>
-  <div id="userforms" class="row form-table">
-    <div id="addinguser" class="">
-    <form action="adduserscript.php" method="post">
-      <!--This is for adding a new user to tbluser -->
-      First name:<input type="text" name="firstname"><br>
-      Surname: <input type="text" name="surname"><br>
-      Username: <input type="text" name="username"><br>
-      Password: <input type="password" name="password"><br>
-      Privilege:<input type="radio" name="privilege" value=0>Admin<input type="radio" name="privilege" value=1>Teacher<input type="radio" name="privilege" value=2>Head<br>
-      <input class="btn" type="Submit" value="Add">
-    </form>
-    </div>
-  </div>
-  <br>
-  <div id="pupilforms" class="row form-table">
-    <div id="addingpupil" class="">
-    <form action="addpupilscript.php" method="post">
-      <!-- this is for adding a new pupil to tblpupil-->
-      First name:<input type="text" name="pupilfirstname"><br>
-      Surname: <input type="text" name="pupilsurname"><br>
-      Year: <input type="number" name="yeargroup"><br>
-      Tutor group:<input type="text" name="tutorgroup"><br>
-      Date of Birth: <input type="date" name='dob'><br>
-      <p>Please enter their Midyis scores below:</p>
-      Vocabulary:<input type="text" name="MVocab"><br>
-      Mathematics:<input type="text" name="MMath"><br>
-      Non-Verbal:<input type="text" name="MNonVerbal"><br>
-      Skills:<input type="text" name="MSkills"><br>
-      Score:<input type="text" name="MScore"><br>
-      <input class="btn" type="submit" value="Add"><br>
-    </form>
-    </div>
-  </div>
-  <br>
-  <div id="tutorgroupforms" class="row form-table">
-    <div id="tutorgroup" class="row">
-      <form id=createtutorgroup action="createtutorgroup.php" method="post"> <!--this allows the admin to input a tutor group id and select a teacher in charge of the tutor group-->
-        Tutorgroup:<input type="text" name="tutorgroupid"><br>
-        Tutor:<select name="userid">
-            <option value="null">Select a teacher</option>
-            <?php
-            $stmt=$conn->prepare("SELECT * FROM tblusers WHERE Privilege=1");
-            $stmt->execute(); //this selects all records in tbluser
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
-            {
-              echo('<option value='.$row["Userid"].'>'.$row["Firstname"].' '.$row["Surname"].'</option>');//this allows the admin to select a teacher
-            }
-            ?>
-          </select><br>
-        <input type="Submit" value="Create"><br>
-      </form>
-    </div>
-    <form id=pupiltutorgroup action="addpupiltotutorgroup.php" method="post">
-      Tutorgroup:
-      <select name="tutorgroupid">
-        <option value="null">Select a tutor group</option>
-        <?php
-        $stmt=$conn->prepare("SELECT * FROM tbltutorgroup");
-        $stmt->execute(); //this selects all record in tbltutorgroup
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
-        {
-          echo('<option value='.$row["Tutorgroupid"].'>'.$row["Tutorgroupid"].'</option>');//this prints them as options
-        }
-        ?>
-      </select><br>
-      Pupil:<select name="pupilid">
-        <option value="null">Select a pupil</option>
-        <?php
-        $stmt=$conn->prepare("SELECT * FROM tblpupil");
-        $stmt->execute(); //this selects all record in tblpupil
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
-        {
-          echo('<option value='.$row["Pupilid"].'>'.$row["Firstname"].' '.$row["Surname"].'</option>');//this prints them as options
-        }
-        ?>
-      </select><br>
-      <button type="submit" class="btn btn-default">Assign</button>
-    </form>
-  </div>
+    </tr>
+  </thead>
+  <tbody>
+    <?php
+    $stmt=$conn->prepare("SELECT * FROM tblpupil");//this selects all sets that are associated with the subject selected.
+    $stmt->execute();
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+      echo('<tr>
+        <th scope="row">'.$row["Pupilid"].'</th>
+        <td>'.$row["Firstname"].'</td>
+        <td>'.$row["Surname"].'</td>
+        <td>'.$row["Year"].'</td>
+        <td>'.$row["DoB"].'</td>
+        <td>'.$row["MidScore"].'</td>
+      </tr>');
+    }
+    ?>
+  </tbody>
+</table>
+<h3>Subjects:</h3>
+<table class="table table-dark table-bordered table-striped">
+    <caption>List of subjects</caption>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Subject</th>
+      <th scope="col">Content</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php
+    $stmt=$conn->prepare("SELECT * FROM tblsubject");//this selects all sets that are associated with the subject selected.
+    $stmt->execute();
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+      echo('<tr>
+        <th scope="row">'.$row["Subjectid"].'</th>
+        <td>'.$row["Subjectname"].'</td>
+        <td>'.$row["Content"].'</td>
+      </tr>');
+    }
+    ?>
+  </tbody>
+</table>
 </div>
 </body>
 </html>

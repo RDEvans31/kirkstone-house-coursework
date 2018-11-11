@@ -17,7 +17,7 @@
 </head>
 <body>
 <?php include_once("connection.php"); ?>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
   <a class="navbar-brand" href="#">KHS</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -55,21 +55,20 @@
           <a class="dropdown-item" href="adminassignpupiltotutorgroup.php">Assign to tutor group</a>
         </div>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="..\logoutscript.php">Logout</a>
+      </li>
     </ul>
   </div>
 </nav>
 <div class="jumbotron text-center">
   <h3>Add a subject:</h3>
-<!--these divs simply seperate the forms-->
-  <div id="subjectforms" class="row">
-    <div id="addingsubject">
-      <form action="addsubjectscript.php" method="post">
+      <form action="..\scripts\addsubjectscript.php" method="post">
         <!--This form is for adding a new subject to tblsubject, it sends the these variables to addsubjectscript.php-->
         Subject:<input type="text" name="subjectname"><br>
         Content:<input type="text" name="subjectcontents"><br>
         <input class="btn" type="Submit" value="Add">
       </form>
-    </div>
 </div>
 </body>
 </html>

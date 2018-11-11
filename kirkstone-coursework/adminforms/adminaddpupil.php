@@ -17,7 +17,7 @@
 </head>
 <body>
 <?php include_once("connection.php"); ?>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
   <a class="navbar-brand" href="#">KHS</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -54,6 +54,9 @@
           <a class="dropdown-item" href="adminaddpupil.php">Add</a>
           <a class="dropdown-item" href="adminassignpupiltotutorgroup.php">Assign to tutor group</a>
         </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="..\logoutscript.php">Logout</a>
       </li>
     </ul>
   </div>
