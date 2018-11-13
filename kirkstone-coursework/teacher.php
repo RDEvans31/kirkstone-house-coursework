@@ -39,15 +39,44 @@
   ?>
 </head>
 <body>
-<nav class="navbar">
-<div class="container-fluid">
-  <div class="navbar-header"><a class="navbar-brand" href="..\Index.php">KHS</a></div>
-  <a class="nav-link" href="teachersubjectreports.php">Subject report</a>
-  <a class="navbar-link" href="logoutscript.php">Logout</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <a class="navbar-brand" href="#">KHS</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="teacher.php">Home<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Pupil performance
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="teacherentergrades.php">Enter grades</a>
+          <a class="dropdown-item" href="teachersubjectreports.php">Subject reports</a>
+          <a class="dropdown-item" href="teachertutorreports.php">Enter Tutor Report</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          View grades
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="teacherviewtuteegrades.php">Tutee</a>
+          <a class="dropdown-item" href="teacherviewsetgrades.php">Sets</a>
+        </div>
+      </li>
+      </li>
+        <a class="nav-link" href="logoutscript.php">Logout</a>
+      </li>
+    </ul>
+  </div>
 </nav>
 <div class="jumbotron text-center">
-  <h1>Welcome</h1>
-<div id="tutorgroup"><!--this will display the tutor group of the teacher that has logged in-->
+  <h3>Welcome</h3>
+<div id="tutorgroup" class="panel-group"><!--this will display the tutor group of the teacher that has logged in-->
   <?php
   $pupilidsintutorgroup=array();
   $stmt=$conn->prepare("SELECT * FROM tbltutorgroup WHERE Userid='$userid'");
@@ -62,17 +91,24 @@
       array_push($pupilidsintutorgroup,$row["Pupilid"]);
     }
   }
-  echo("Tutorgroup: ".$tutorgroup);
-  echo "<ul>";
-  foreach ($pupilidsintutorgroup as $x) {
-    $stmt=$conn->prepare("SELECT Surname,Firstname FROM tblpupil WHERE Pupilid='$x'");
-    $stmt->execute();
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-      echo ("<li>".$row["Firstname"].' '.$row["Surname"]."</li>");
-      }
-  }
-  echo "</ul>"
+  $_SESSION["tutorgroup"]=$pupilidsintutorgroup;
+  echo('Tutorgroup:'.$tutorgroup);
   ?>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <?php
+      $stmt=$conn->prepare("SELECT * FROM tblusers");//this selects all sets that are associated with the subject selected.
+      $stmt->execute();
+      foreach ($pupilidsintutorgroup as $x) {
+        $stmt=$conn->prepare("SELECT Surname,Firstname FROM tblpupil WHERE Pupilid='$x'");
+        $stmt->execute();
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+          echo('<li>'.$row["Firstname"].' '.$row["Surname"].'</li>');
+          }
+      }
+      ?>
+    </div>
+</div>
 </div>
 <div id="showsetstaught">
   <?php
@@ -101,33 +137,6 @@
       }
     }
   ?>
-<div id="entergrades">
-  <form name="entergradesform" action="entergradesscript.php" method="post">
-    Set:<select onchange="showPupilsinset(this.value)" name="set">
-    <option value="">Select a set</option>
-    <?php
-    $stmt=$conn->prepare("SELECT Setid FROM tblset WHERE Userid='$userid'"); //returns sets taught by teacher that logged in
-    $stmt->execute();
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-      echo("<option value=".$row["Setid"].">".$row["Setid"]."</option>");
-    }
-    ?>
-    </select><br>
-    Pupil: <select id="selectpupil" name="pupilid"></select><br>
-    Term:<select name="term">
-      <option value="Aut1">Autumn 1</option>
-      <option value="Aut2">Autumn 2</option>
-      <option value="Spr1">Spring 1</option>
-      <option value="Spr2">Spring 2</option>
-      <option value="Sum1">Summer 1</option>
-      <option value="Sum2">Summer 2</option>
-    </select><br>
-    Target:<input type="text" name="target" placeholder="fill only if neccessary"><br>
-    Effort:<input type="text" name="effort"><br>
-    Achieve:<input type="text" name="achieve"><br>
-    <input type="Submit" value="Assign">
-  </form>
-</div>
 <div id="tutorreport">
   <form name="tutorreportform" action="tutorreportscript.php" method="post">
     Pupil:<select name="pupilidreport">
@@ -135,6 +144,7 @@
       <<?php
        //produces list of pupils within tutor group
        //makes use of the varibales in tutorgroup div
+       $pupilidsintutorgroup=$_SESSION["tutorgroup"];
        foreach ($pupilidsintutorgroup as $x) {
          $stmt=$conn->prepare("SELECT Surname,Firstname FROM tblpupil WHERE Pupilid='$x'");
          $stmt->execute();

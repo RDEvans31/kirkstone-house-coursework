@@ -1,10 +1,12 @@
 <html lang="en" > <!--this declares english language as the primary -->
 <head>
-  <title>Subject report</title>
-  <!--these connectt to bootstrap through a cdn-->
+  <title>Teacher</title>
+  <!--these connec to bootstrap through a cdn-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script>
         function showPupilsinset(setid){//shows pupils in the selected set
           var xhttp;
@@ -27,12 +29,14 @@
     background-color: #444444;
     color: #fff;
   }
+  select {color:#000;}
+  input {color:#000;}
   </style>
-<?php
-include_once("connection.php");
-session_start();
-$userid=$_SESSION["userid"];
-?>
+  <?php
+  include_once("connection.php");
+  session_start();
+  $userid=$_SESSION["userid"];
+  ?>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -70,50 +74,34 @@ $userid=$_SESSION["userid"];
     </div>
   </nav>
 <div class="jumbotron text-center">
-  <div id="subjectreport">
-  <form id="subjectreportform" action="subjectreportscript.php" method="post">
-   Set:<select onchange="showPupilsinset(this.value)" name="setid">
-     <option value="">Select a set</option>
-     <?php
-     $stmt=$conn->prepare("SELECT Setid FROM tblset WHERE Userid='$userid'"); //returns sets taught by teacher that logged in
-     $stmt->execute();
-     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-       echo("<option value=".$row["Setid"].">".$row["Setid"]."</option>");
-     }
-     ?>
-   </select>
-   <br>
-   Pupil: <select id="selectpupil" name="pupilid">
-     <option>Select a set</option>
-   </select><br>
-   Adherence to deadlines:<br>
-   <input type="radio" name="deadline" value="a"> A<br>
-   <input type="radio" name="deadline" value="b"> B<br>
-   <input type="radio" name="deadline" value="c"> C<br>
-   <input type="radio" name="deadline" value="d"> D<br>
-   <br>
-   Presentation of work:<br>
-   <input type="radio" name="presentation" value="a"> A<br>
-   <input type="radio" name="presentation" value="b"> B<br>
-   <input type="radio" name="presentation" value="c"> C<br>
-   <input type="radio" name="presentation" value="d"> D<br>
-   <br>
-   Participation in lessons:<br>
-   <input type="radio" name="participation" value="a"> A<br>
-   <input type="radio" name="participation" value="b"> B<br>
-   <input type="radio" name="participation" value="c"> C<br>
-   <input type="radio" name="participation" value="d"> D<br>
-   <br>
-   Organisational skills:<br>
-   <input type="radio" name="organisation" value="a"> A<br>
-   <input type="radio" name="organisation" value="b"> B<br>
-   <input type="radio" name="organisation" value="c"> C<br>
-   <input type="radio" name="organisation" value="d"> D<br>
-   <br>
-   Comments:<input type="text" name="teachercomments"><br>
-   <input type="Submit" value="Save">
-
+  <h3>Enter grades for each pupil</h3>
+<div id="entergrades">
+  <form name="entergradesform" action="scripts\entergradesscript.php" method="post">
+    Set:<select onchange="showPupilsinset(this.value)" name="set">
+    <option value="">Select a set</option>
+    <?php
+    $stmt=$conn->prepare("SELECT Setid FROM tblset WHERE Userid='$userid'"); //returns sets taught by teacher that logged in
+    $stmt->execute();
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+      echo("<option value=".$row["Setid"].">".$row["Setid"]."</option>");
+    }
+    ?>
+    </select><br>
+    Pupil: <select id="selectpupil" name="pupilid"></select><br>
+    Term:<select name="term">
+      <option value="Aut1">Autumn 1</option>
+      <option value="Aut2">Autumn 2</option>
+      <option value="Spr1">Spring 1</option>
+      <option value="Spr2">Spring 2</option>
+      <option value="Sum1">Summer 1</option>
+      <option value="Sum2">Summer 2</option>
+    </select><br>
+    Target:<input type="text" name="target" placeholder="fill only if neccessary"><br>
+    Effort:<input type="text" name="effort"><br>
+    Achieve:<input type="text" name="achieve"><br>
+    <input type="Submit" value="Assign">
   </form>
-  </div>
+</div>
+
 </body>
 </html>
