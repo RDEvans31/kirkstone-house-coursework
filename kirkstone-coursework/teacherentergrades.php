@@ -76,7 +76,7 @@
 <div class="jumbotron text-center">
   <h3>Enter grades for each pupil</h3>
 <div id="entergrades">
-  <form name="entergradesform" action="scripts\entergradesscript.php" method="post">
+  <form name="entergradesform" action="scripts/entergradesscript.php" method="post">
     Set:<select onchange="showPupilsinset(this.value)" name="set">
     <option value="">Select a set</option>
     <?php

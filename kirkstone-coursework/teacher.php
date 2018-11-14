@@ -118,6 +118,7 @@
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
       array_push($setstaught,$row["Setid"]); //adds the set id to an array of sets taught
     }
+    $_SESSION["sets"]=$setstaught;
     foreach ($setstaught as $x) { //loops through each set taught by teacher
       echo("Set: ".$x);
       $pupilsinset=array(); // initialise here because needs to be cleared and re-initiated at the end of this loop.
