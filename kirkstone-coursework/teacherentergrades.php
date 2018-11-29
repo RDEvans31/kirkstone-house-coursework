@@ -49,6 +49,9 @@
         <li class="nav-item active">
           <a class="nav-link" href="teacher.php">Home<span class="sr-only">(current)</span></a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="teacheraddcmdd.php">Pupil awards<span class="sr-only">(current)</span></a>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Pupil performance
@@ -56,6 +59,7 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="teacherentergrades.php">Enter grades</a>
             <a class="dropdown-item" href="teachersubjectreports.php">Subject reports</a>
+            <a class="dropdown-item" href="teachertutorreports.php">Enter Tutor Report</a>
           </div>
         </li>
         <li class="nav-item dropdown">

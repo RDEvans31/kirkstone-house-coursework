@@ -2,7 +2,6 @@
 <body>
 <?php
 include_once("connection.php");
-header("Location:formstesting.php");
 array_map("htmlspecialchars", $_POST);
 $stmt=$conn->prepare("INSERT INTO tblpupil (Pupilid,Surname,Firstname,Year,DoB,MidVocab,MidMaths,MidNonVerbal,MidSkills,MidScore) VALUES (null,:surname,:firstname,:year,:DoB,:vocab,:math,:nonverbal,:skills,:score)");
 $stmt->bindParam(':surname', $_POST["pupilsurname"]); //assigns the input from the form to the values that will be added to the field

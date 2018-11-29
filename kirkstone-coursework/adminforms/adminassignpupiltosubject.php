@@ -46,6 +46,9 @@
       <li class="nav-item active">
         <a class="nav-link" href="..\admin.php">Admin <span class="sr-only">(current)</span></a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="adminaddterms.php">Add Terms <span class="sr-only">(current)</span></a>
+      </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Subjects

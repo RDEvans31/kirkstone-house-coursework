@@ -7,6 +7,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jq-3.3.1/jszip-2.5.0/dt-1.10.18/b-1.5.4/b-html5-1.5.4/datatables.min.css"/>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/jszip-2.5.0/dt-1.10.18/b-1.5.4/b-html5-1.5.4/datatables.min.js"></script>
   <script>
         function showPupilsinset(setid){//shows pupils in the selected set
           var xhttp;
@@ -23,6 +28,40 @@
           xhttp.open("GET", "ajaxpupilsinset.php?setid="+setid, true);
           xhttp.send();
         }
+  </script>
+  <script>
+  $(document).ready( function () {
+      $('#tuteetable').DataTable(
+        {
+          responsive: true,
+          dom: 'Bfrtip',
+          paging: false,
+          buttons: [
+            {
+              extend:'pdf',
+              text:'Print',
+              download:'open',
+              orientation: 'landscape',
+              title: 'Tutor report',
+              customize: function (doc) {
+                doc.content[1].table.widths =
+                Array(doc.content[1].table.body[0].length + 1).join('*').split('');
+
+                var rowCount = doc.content[1].table.body.length;
+                for (i = 1; i < rowCount; i++) {
+                  doc.content[1].table.body[i][0].alignment = 'center';
+                  doc.content[1].table.body[i][1].alignment = 'center';
+                  doc.content[1].table.body[i][2].alignment = 'center';
+                  doc.content[1].table.body[i][3].alignment = 'center';
+                  doc.content[1].table.body[i][4].alignment = 'center';
+                  doc.content[1].table.body[i][5].alignment = 'center';
+                };
+              },
+            },
+          ],
+        }
+      );
+  } );
   </script>
   <style>
   .jumbotron {
@@ -50,6 +89,9 @@
         <li class="nav-item active">
           <a class="nav-link" href="teacher.php">Home<span class="sr-only">(current)</span></a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="teacheraddcmdd.php">Pupil awards<span class="sr-only">(current)</span></a>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Pupil performance
@@ -57,6 +99,7 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="teacherentergrades.php">Enter grades</a>
             <a class="dropdown-item" href="teachersubjectreports.php">Subject reports</a>
+            <a class="dropdown-item" href="teachertutorreports.php">Enter Tutor Report</a>
           </div>
         </li>
         <li class="nav-item dropdown">
@@ -74,9 +117,9 @@
       </ul>
     </div>
   </nav>
-<div class="jumbotron text-center">
+<div class="jumbotron">
   <h3>Welcome</h3>
-<div id="tutorgroupgrades"><!--this will display the grades of each tutee-->
+<div id="tutorgroupgrades" class="mt-5"><!--this will display the grades of each tutee-->
   <?php
 
   foreach ($pupilidsintutorgroup as $x) {
@@ -86,8 +129,8 @@
         $name=$row["Firstname"].' '.$row["Surname"];//this gets the name of the pupil that we will output the grades for
       }
     echo(
-  "Pupil: ".$name.
-  '<table class="table table-dark">
+  "<h5 class='mb-3'>Pupil: ".$name.'</h5>
+  <table id="tuteetable" class="table table-dark display">
   <thead>
     <tr>
       <th scope="col">Subject</th>
@@ -104,10 +147,6 @@
       <th scope="col">Sum1E</th>
       <th scope="col">Sum2A</th>
       <th scope="col">Sum2E</th>
-      <th scope="col">Merits</th>
-      <th scope="col">Commendations</th>
-      <th scope="col">Debits</th>
-      <th scope="col">Detentions</th>
 
     </tr>
   </thead>
@@ -138,10 +177,6 @@
         <td>'.$row["Sum1E"].'</td>
         <td>'.$row["Sum2A"].'</td>
         <td>'.$row["Sum2E"].'</td>
-        <td>'.$row["Merits"].'</td>
-        <td>'.$row["Commendations"].'</td>
-        <td>'.$row["Debits"].'</td>
-        <td>'.$row["Detentions"].'</td>
 
       </tr>
     ');

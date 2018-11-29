@@ -7,6 +7,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jq-3.3.1/jszip-2.5.0/dt-1.10.18/b-1.5.4/b-html5-1.5.4/datatables.min.css"/>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/jszip-2.5.0/dt-1.10.18/b-1.5.4/b-html5-1.5.4/datatables.min.js"></script>
   <style>
   .jumbotron {
     background-color: #444444;
@@ -33,6 +38,9 @@
         <li class="nav-item active">
           <a class="nav-link" href="teacher.php">Home<span class="sr-only">(current)</span></a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="teacheraddcmdd.php">Pupil awards<span class="sr-only">(current)</span></a>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Pupil performance
@@ -40,6 +48,7 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="teacherentergrades.php">Enter grades</a>
             <a class="dropdown-item" href="teachersubjectreports.php">Subject reports</a>
+            <a class="dropdown-item" href="teachertutorreports.php">Enter Tutor Report</a>
           </div>
         </li>
         <li class="nav-item dropdown">
@@ -82,10 +91,6 @@
             <th scope="col">Sum1E</th>
             <th scope="col">Sum2A</th>
             <th scope="col">Sum2E</th>
-            <th scope="col">Merits</th>
-            <th scope="col">Commendations</th>
-            <th scope="col">Debits</th>
-            <th scope="col">Detentions</th>
 
           </tr>
         </thead>
@@ -116,10 +121,13 @@
                 <td>'.$row["Sum1E"].'</td>
                 <td>'.$row["Sum2A"].'</td>
                 <td>'.$row["Sum2E"].'</td>
-                <td>'.$row["Merits"].'</td>
-                <td>'.$row["Commendations"].'</td>
-                <td>'.$row["Debits"].'</td>
-                <td>'.$row["Detentions"].'</td>
+                <td>
+                <form action="teachergeneratesubjectreport.php" method="post" target="teachergeneratesubjectreport.php">
+                  <input type="hidden" name="pupilid" value="'.$pupilid.'">
+                  <input type="hidden" name="setid" value="'.$x.'">
+                  <input class="btn" type="Submit" value="Print">
+                </form>
+                </td>
               </tr>
               ');
             }
