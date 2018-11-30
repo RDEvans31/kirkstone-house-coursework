@@ -3,23 +3,13 @@ header("Location:teachersubjectreports.php");//redirects them back to the teache
 include_once("connection.php");
 array_map("htmlspecialchars", $_POST);
 //this decides what term it is for the report
-switch (date("m")) {
-  case '01':
-  case '02':
-  case '03':
-    $term="Spr";
-    break;
-  case '04':
-  case '05':
-  case '06':
-    $term="Sum";
-    break;
-  case '09':
-  case '10':
-  case '11':
-  case '12':
-    $term="Aut";
-    break;
+$date=date("Y-m-d");
+$getterm=$conn->prepare("SELECT * FROM tblterms");
+$getterm->execute();
+while ($row = $getterm->fetch(PDO::FETCH_ASSOC)) {
+  if ($date>$row["Datestart"] and $date<$row["Dateend"]) {
+    $term=$row["Term"];
+  }
 }
 
 $setid=$_POST["setid"];

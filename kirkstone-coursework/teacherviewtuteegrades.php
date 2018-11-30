@@ -165,18 +165,18 @@
       <tr>
         <th scope="row">'.$subjectname.'</th>
         <td>'.$row["Target"].'</td>
-        <td>'.$row["Aut1A"].'</td>
-        <td>'.$row["Aut1E"].'</td>
-        <td>'.$row["Aut2A"].'</td>
-        <td>'.$row["Aut2E"].'</td>
-        <td>'.$row["Spr1A"].'</td>
-        <td>'.$row["Spr1E"].'</td>
-        <td>'.$row["Spr2A"].'</td>
-        <td>'.$row["Spr2E"].'</td>
-        <td>'.$row["Sum1A"].'</td>
-        <td>'.$row["Sum1E"].'</td>
-        <td>'.$row["Sum2A"].'</td>
-        <td>'.$row["Sum2E"].'</td>
+        <td>'.$row["Autumn1A"].'</td>
+        <td>'.$row["Autumn1E"].'</td>
+        <td>'.$row["Autumn2A"].'</td>
+        <td>'.$row["Autumn2E"].'</td>
+        <td>'.$row["Spring1A"].'</td>
+        <td>'.$row["Spring1E"].'</td>
+        <td>'.$row["Spring2A"].'</td>
+        <td>'.$row["Spring2E"].'</td>
+        <td>'.$row["Summer1A"].'</td>
+        <td>'.$row["Summer1E"].'</td>
+        <td>'.$row["Summer2A"].'</td>
+        <td>'.$row["Summer2E"].'</td>
 
       </tr>
     ');

@@ -15,7 +15,6 @@ function Header()
     $this->Ln(20);
 }
 }
-// Instanciation of inherited class
 //get the term
 $year=date("Y");
 $date=date("Y-m-d");
@@ -26,7 +25,6 @@ while ($row = $getterm->fetch(PDO::FETCH_ASSOC)) {
     $term=$row["Term"];
   }
 }
-$term=$term.' '.$year;
 $pupilid=$_POST["pupilid"];
 $setid=$_POST["setid"];
 //this block of code will get the pupilname and year
@@ -48,13 +46,28 @@ while ($row = $getsubjectinfo->fetch(PDO::FETCH_ASSOC)) {
     $subject=$row["Subjectname"];
     $coursecontent=$row["Content"];
 }
+//this block of code will retreive their attainment and effort for the current term from tblpupilstudies
+$attainmentcolumn=$term."A";
+$effortcolumn=$term."E";
+echo("SELECT $attainmentcolumn AS A, $effortcolumn AS E FROM tblpupilstudies WHERE Setid=:setid AND Pupilid=:pupilid");
+$getperformance=$conn->prepare("SELECT $attainmentcolumn AS A, $effortcolumn AS E FROM tblpupilstudies WHERE Setid=:setid AND Pupilid=:pupilid");
+$getperformance->execute();
+while ($row = $getperformance->fetch(PDO::FETCH_ASSOC)) {
+    $attainment=$row[A];
+    $effort=$row[E];
+}
+echo("Attainment:".$attainment);
+echo("<br>");
+echo("Effort: ".$effort);
 
+//this generates and formats the pdf with the given distribution.
+/*
 $pdf = new PDF();
 $pdf->AliasNbPages();
 $pdf->AddPage();
 $pdf->SetFont('Times','',12);
 $pdf->SetXY (10,30);
-$pdf->Write(5,'Term: '.$term);
+$pdf->Write(5,'Term: '.$term.' '.$year);
 
 
 $pdf->SetXY (10,40);
@@ -73,9 +86,10 @@ $pdf->SetXY (10,70);
 $pdf->Cell(175,50,$coursecontent,1,0,'C');
 
 $pdf->SetXY (10,130);
-$pdf->Cell(20,10,'Attainment:',1,0,'C');
+$pdf->Cell(20,10,'Attainment:'.$attainment,1,0,'C');
 $pdf->SetXY (10,140);
-$pdf->Cell(20,10,'Effort:',1,0,'C');
+$pdf->Cell(20,10,'Effort:'.$effort,1,0,'C');
 
 $pdf->Output();
+*/
 ?>

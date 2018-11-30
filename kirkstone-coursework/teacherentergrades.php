@@ -93,12 +93,12 @@
     </select><br>
     Pupil: <select id="selectpupil" name="pupilid"></select><br>
     Term:<select name="term">
-      <option value="Aut1">Autumn 1</option>
-      <option value="Aut2">Autumn 2</option>
-      <option value="Spr1">Spring 1</option>
-      <option value="Spr2">Spring 2</option>
-      <option value="Sum1">Summer 1</option>
-      <option value="Sum2">Summer 2</option>
+      <option value="Autumn1">Autumn 1</option>
+      <option value="Autumn2">Autumn 2</option>
+      <option value="Spring1">Spring 1</option>
+      <option value="Spring2">Spring 2</option>
+      <option value="Summer1">Summer 1</option>
+      <option value="Summer2">Summer 2</option>
     </select><br>
     Target:<input type="text" name="target" placeholder="fill only if neccessary"><br>
     Effort:<input type="text" name="effort"><br>
