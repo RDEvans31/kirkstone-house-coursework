@@ -8,7 +8,7 @@ function Header()
 {
     $this->SetFont('Arial','B',15);
     // Move to the right
-    $this->Cell(80);
+    $this->Cell(70);
     // Title
     $this->Cell(50,10,'Subject report',1,0,'C');
     // Line break
@@ -49,19 +49,13 @@ while ($row = $getsubjectinfo->fetch(PDO::FETCH_ASSOC)) {
 //this block of code will retreive their attainment and effort for the current term from tblpupilstudies
 $attainmentcolumn=$term."A";
 $effortcolumn=$term."E";
-echo("SELECT $attainmentcolumn AS A, $effortcolumn AS E FROM tblpupilstudies WHERE Setid=:setid AND Pupilid=:pupilid");
-$getperformance=$conn->prepare("SELECT $attainmentcolumn AS A, $effortcolumn AS E FROM tblpupilstudies WHERE Setid=:setid AND Pupilid=:pupilid");
+$getperformance=$conn->prepare("SELECT $attainmentcolumn AS A, $effortcolumn AS E FROM tblpupilstudies WHERE Setid='$setid' AND Pupilid='$pupilid'");
 $getperformance->execute();
 while ($row = $getperformance->fetch(PDO::FETCH_ASSOC)) {
-    $attainment=$row[A];
-    $effort=$row[E];
+    $attainment=$row['A'];
+    $effort=$row['E'];
 }
-echo("Attainment:".$attainment);
-echo("<br>");
-echo("Effort: ".$effort);
-
-//this generates and formats the pdf with the given distribution.
-/*
+//this generates and formats the pdf with the given information.
 $pdf = new PDF();
 $pdf->AliasNbPages();
 $pdf->AddPage();
@@ -82,14 +76,15 @@ $pdf->SetXY (160,40);
 $pdf->SetFontSize(10);
 $pdf->Write(5,'Year: '.$pupilyear);
 
+$pdf->SetXY (10,60);
+$pdf->Write(5,'Course content:');
 $pdf->SetXY (10,70);
 $pdf->Cell(175,50,$coursecontent,1,0,'C');
 
 $pdf->SetXY (10,130);
-$pdf->Cell(20,10,'Attainment:'.$attainment,1,0,'C');
+$pdf->Cell(25,10,'Attainment: '.$attainment,1,0,'L');
 $pdf->SetXY (10,140);
-$pdf->Cell(20,10,'Effort:'.$effort,1,0,'C');
+$pdf->Cell(25,10,'Effort: '.$effort,1,0,'L');
 
 $pdf->Output();
-*/
 ?>
