@@ -34,30 +34,8 @@
       $('#tuteetable').DataTable(
         {
           responsive: true,
-          dom: 'Bfrtip',
-          paging: false,
-          buttons: [
-            {
-              extend:'pdf',
-              text:'Print',
-              download:'open',
-              orientation: 'landscape',
-              title: 'Tutor report',
-              customize: function (doc) {
-                doc.content[1].table.widths =
-                Array(doc.content[1].table.body[0].length + 1).join('*').split('');
+          dom: 'rt',
 
-                var rowCount = doc.content[1].table.body.length;
-                for (i = 1; i < rowCount; i++) {
-                  doc.content[1].table.body[i][0].alignment = 'center';
-                  doc.content[1].table.body[i][1].alignment = 'center';
-                  doc.content[1].table.body[i][2].alignment = 'center';
-                  doc.content[1].table.body[i][3].alignment = 'center';
-                  doc.content[1].table.body[i][4].alignment = 'center';
-                  doc.content[1].table.body[i][5].alignment = 'center';
-                };
-              },
-            },
           ],
         }
       );
@@ -75,7 +53,7 @@
   include_once("connection.php");
   session_start();
   $userid=$_SESSION["userid"];
-  $pupilidsintutorgroup=$_SESSION["tutorgroup"];
+  $pupilidsintutorgroup=$_SESSION["tutorgrouppupils"];
   ?>
 </head>
 <body>
@@ -125,42 +103,62 @@
   foreach ($pupilidsintutorgroup as $x) {
     $stmt=$conn->prepare("SELECT Surname,Firstname FROM tblpupil WHERE Pupilid='$x'");
     $stmt->execute();
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $name=$row["Firstname"].' '.$row["Surname"];//this gets the name of the pupil that we will output the grades for
-      }
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    $name=$row["Firstname"].' '.$row["Surname"];//this gets the name of the pupil that we will output the grades for
     echo(
-  "<h5 class='mb-3'>Pupil: ".$name.'</h5>
+  '
+  <form action="teachergeneratetutorreport.php" method="post" target="teachergeneratetutorreport.php">
+    <input type="hidden" name="pupilid" value="'.$x.'">
+    <input type="hidden" name="tutorgroup" value="'.$_SESSION["tutorgroup"].'">
+    <input class="btn" type="Submit" value="Tutor report">
+  </form>
   <table id="tuteetable" class="table table-dark display">
   <thead>
     <tr>
-      <th scope="col">Subject</th>
+      <th>Name:</th>
+      <th>'.$name.'</th>
+    </tr>
+    <tr>
+      <th>Subject</th>
+      <th></th>
+      <th colspan= "2" scope="colgroup">Autumn</th>
+      <th colspan= "2" scope="colgroup">Autumn</th>
+      <th colspan= "2" scope="colgroup">Spring</th>
+      <th colspan= "2" scope="colgroup">Spring</th>
+      <th colspan= "2" scope="colgroup">Summer</th>
+      <th colspan= "2" scope="colgroup">Summer</th>
+    </tr>
+    <tr>
+      <th scope="col"></th>
       <th scope="col">Target</th>
-      <th scope="col">Aut1A</th>
-      <th scope="col">Aut1E</th>
-      <th scope="col">Aut2A</th>
-      <th scope="col">Aut2E</th>
-      <th scope="col">Spr1A</th>
-      <th scope="col">Spr1E</th>
-      <th scope="col">Spr2A</th>
-      <th scope="col">Spr2E</th>
-      <th scope="col">Sum1A</th>
-      <th scope="col">Sum1E</th>
-      <th scope="col">Sum2A</th>
-      <th scope="col">Sum2E</th>
-
+      <th scope="col">1A</th>
+      <th scope="col">1E</th>
+      <th scope="col">2A</th>
+      <th scope="col">2E</th>
+      <th scope="col">1A</th>
+      <th scope="col">1E</th>
+      <th scope="col">2A</th>
+      <th scope="col">2E</th>
+      <th scope="col">1A</th>
+      <th scope="col">1E</th>
+      <th scope="col">2A</th>
+      <th scope="col">2E</th>
     </tr>
   </thead>
   <tbody>
+
     ');
     $stmt=$conn->prepare("SELECT * FROM tblpupilstudies WHERE Pupilid='$x'");
     $stmt->execute();
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { // for each of these records, I will print out the data but also get the subjectname based on the subject id of the record
-        $subjectid=$row["Subjectid"];
+        $setid=$row["Setid"];
+        $getsubjectid=$conn->prepare("SELECT Subjectid FROM tblset WHERE Setid='$setid'");
+        $getsubjectid->execute();
+        $subjectid = $getsubjectid->fetch(PDO::FETCH_COLUMN);
         $getsubjectname=$conn->prepare("SELECT Subjectname FROM tblsubject WHERE Subjectid='$subjectid'");
         $getsubjectname->execute();
-        while ($row2 = $getsubjectname->fetch(PDO::FETCH_ASSOC)) {
-            $subjectname=$row2["Subjectname"];//this stores the subjectname of the subject we are dealing with in this row of the table.
-          }
+        $row2 = $getsubjectname->fetch(PDO::FETCH_ASSOC);
+        $subjectname=$row2["Subjectname"];//this stores the subjectname of the subject we are dealing with in this row of the table.
       echo('
       <tr>
         <th scope="row">'.$subjectname.'</th>

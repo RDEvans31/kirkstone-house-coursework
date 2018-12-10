@@ -84,9 +84,8 @@
   $pupilidsintutorgroup=array();
   $stmt=$conn->prepare("SELECT * FROM tbltutorgroup WHERE Userid='$userid'");
   $stmt->execute();
-  while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-    $tutorgroup=$row["Tutorgroupid"];
-  }
+  $row = $stmt->fetch(PDO::FETCH_ASSOC);
+  $tutorgroup=$row["Tutorgroupid"];
   $stmt=$conn->prepare("SELECT * FROM tbltutorpupil WHERE Tutorgroupid='$tutorgroup'");
   $stmt->execute();
   while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -94,7 +93,8 @@
       array_push($pupilidsintutorgroup,$row["Pupilid"]);
     }
   }
-  $_SESSION["tutorgroup"]=$pupilidsintutorgroup;
+  $_SESSION["tutorgroup"]=$tutorgroup;
+  $_SESSION["tutorgrouppupils"]=$pupilidsintutorgroup;
   echo('Tutorgroup:'.$tutorgroup);
   ?>
   <div class="panel panel-default">

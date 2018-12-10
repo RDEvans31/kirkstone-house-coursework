@@ -1,4 +1,5 @@
 <?php
+
 require('fpdf/fpdf.php');
 include_once("connection.php");
 class PDF extends FPDF
@@ -14,7 +15,20 @@ function Header()
     // Line break
     $this->Ln(20);
 }
+// Simple table
+function Table($header, $data)
+{
+  // Header
+  foreach($header as $col)
+      $this->Cell(40,7,$col,1);
+  $this->Ln();
+  // Data
+  foreach($data as $col)
+      $this->Cell(40,6,$col,1);
+  $this->Ln();
+  }
 }
+
 //get the term
 $year=date("Y");
 $date=date("Y-m-d");
@@ -55,10 +69,20 @@ while ($row = $getperformance->fetch(PDO::FETCH_ASSOC)) {
     $attainment=$row['A'];
     $effort=$row['E'];
 }
+//this block of code will format the table in the subject report
+
+$tableheader = array('Adherence to deadlines', 'Presentation', 'Participation', 'Organisational Skills');
+$getconduct=$conn->prepare("SELECT Deadlines, Presentation, Participation, Organisation FROM tblsubjectreport WHERE Term='$term' AND Pupilid='$pupilid' AND Year='$year'");
+$getconduct->execute();
+$conduct= $getconduct->fetch(PDO::FETCH_NUM);
+$getteachercomments=$conn->prepare("SELECT Teachercomments FROM tblsubjectreport WHERE Term='$term' AND Pupilid='$pupilid' AND Year='$year'");
+$getteachercomments->execute();
+$teachercomments= $getteachercomments->fetch(PDO::FETCH_COLUMN);
 //this generates and formats the pdf with the given information.
 $pdf = new PDF();
 $pdf->AliasNbPages();
 $pdf->AddPage();
+
 $pdf->SetFont('Times','',12);
 $pdf->SetXY (10,30);
 $pdf->Write(5,'Term: '.$term.' '.$year);
@@ -85,6 +109,16 @@ $pdf->SetXY (10,130);
 $pdf->Cell(25,10,'Attainment: '.$attainment,1,0,'L');
 $pdf->SetXY (10,140);
 $pdf->Cell(25,10,'Effort: '.$effort,1,0,'L');
+$pdf->SetXY (10,155);
+$pdf->Table($tableheader,$conduct);
 
+$pdf->SetXY (10,175);
+$pdf->Write(5,'Teacher comments:');
+$pdf->SetXY (10,180);
+$pdf->Cell(180,50,$teachercomments,1,0,'L');
+
+$pdf->SetXY (10,250);
+$pdf->Write(5,'Signed:');
 $pdf->Output();
+
 ?>

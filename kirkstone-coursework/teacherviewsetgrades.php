@@ -24,7 +24,6 @@
   include_once("connection.php");
   session_start();
   $userid=$_SESSION["userid"];
-  $pupilidsintutorgroup=$_SESSION["tutorgroup"];
   ?>
 </head>
 <body>

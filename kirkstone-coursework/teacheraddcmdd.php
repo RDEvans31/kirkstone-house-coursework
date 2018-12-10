@@ -93,7 +93,7 @@
       <br><!--select a pupil, all pupils are available for selection as any teacher may want to give any pupil an award (or punishemnt)-->
       <input type="radio" id="commendation" name="award" value="Commendations">
        <label for="commendation">Commendation</label>
-      <input type="radio" id="merit" name="award" value="Merit">
+      <input type="radio" id="merit" name="award" value="Merits">
        <label for="merit">Merit</label>
       <input type="radio" id="debit" name="award" value="Debits">
        <label for="debit">Debit</label>
