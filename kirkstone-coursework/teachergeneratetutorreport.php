@@ -99,7 +99,7 @@ $pdf->SetXY (50,40);
 $pdf->Cell(40,5,'Tutor group: '.$tutorgroup,1,0,'L');
 
 $pdf->SetXY (50,45);
-$pdf->SetFont('Arial','',9);
+$pdf->SetFont('Arial','',7);
 $xcoord=50;
 $terms=array('Autumn 1','Autumn 2','Spring 1','Spring 2','Summer 1','Summer 2');
 foreach ($terms as $i) {
@@ -156,7 +156,58 @@ $stmt->execute();
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
   $term=$row["Term"];
   $commendations[$term]=$row["Commendations"];
-  $commendations[$term]=$row["Commendations"];
+  $detentions[$term]=$row["Detentions"];
+  $merits[$term]=$row["Debits"];
+  $debits[$term]=$row["Merits"];
+}
+$cmdd=array('Merits','Commendations','Debits','Detentions');
+// X and Y coords are already set from previous
+foreach ($cmdd as $i) {
+  $pdf->Cell(20,5,$i,1,0,'C');
+  $ycoord=$ycoord+5;
+  $pdf->SetXY ($xcoord,$ycoord);
+}
+//next column
+$xcoord=$xcoord+20;
+$ycoord=$ycoord-20;
+$pdf->SetXY ($xcoord,$ycoord);
+for ($i=1; $i<5 ; $i++) {
+  $pdf->Cell(20,5,'',1,0,'C');
+  $ycoord=$ycoord+5;
+  $pdf->SetXY ($xcoord,$ycoord);
+}
+$xcoord=$xcoord+20;
+$ycoord=$ycoord-20;
+$pdf->SetXY ($xcoord,$ycoord);
+//
+foreach ($merits as $i) {
+  $pdf->Cell(40,5,$i,1,0,'C');
+  $xcoord=$xcoord+40;
+  $pdf->SetXY ($xcoord,$ycoord);
+}
+$xcoord=$xcoord-240;
+$ycoord=$ycoord+5;
+$pdf->SetXY ($xcoord,$ycoord);
+foreach ($commendations as $i) {
+  $pdf->Cell(40,5,$i,1,0,'C');
+  $xcoord=$xcoord+40;
+  $pdf->SetXY ($xcoord,$ycoord);
+}
+$xcoord=$xcoord-240;
+$ycoord=$ycoord+5;
+$pdf->SetXY ($xcoord,$ycoord);
+foreach ($debits as $i) {
+  $pdf->Cell(40,5,$i,1,0,'C');
+  $xcoord=$xcoord+40;
+  $pdf->SetXY ($xcoord,$ycoord);
+}
+$xcoord=$xcoord-240;
+$ycoord=$ycoord+5;
+$pdf->SetXY ($xcoord,$ycoord);
+foreach ($detentions as $i) {
+  $pdf->Cell(40,5,$i,1,0,'C');
+  $xcoord=$xcoord+40;
+  $pdf->SetXY ($xcoord,$ycoord);
 }
 
 $pdf->Output();
