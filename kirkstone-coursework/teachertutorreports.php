@@ -74,50 +74,26 @@ $userid=$_SESSION["userid"];
     </div>
   </nav>
 <div class="jumbotron text-center">
-  <div id="subjectreport">
-  <form id="subjectreportform" action="scripts/subjectreportscript.php" method="post">
-   Set:<select onchange="showPupilsinset(this.value)" name="setid">
-     <option value="">Select a set</option>
-     <?php
-     $stmt=$conn->prepare("SELECT Setid FROM tblset WHERE Userid='$userid'"); //returns sets taught by teacher that logged in
-     $stmt->execute();
-     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-       echo("<option value=".$row["Setid"].">".$row["Setid"]."</option>");
-     }
-     ?>
-   </select>
-   <br>
-   Pupil: <select id="selectpupil" name="pupilid">
-     <option>Select a set</option>
-   </select><br>
-   Adherence to deadlines:<br>
-   <input type="radio" name="deadline" value="a"> A<br>
-   <input type="radio" name="deadline" value="b"> B<br>
-   <input type="radio" name="deadline" value="c"> C<br>
-   <input type="radio" name="deadline" value="d"> D<br>
-   <br>
-   Presentation of work:<br>
-   <input type="radio" name="presentation" value="a"> A<br>
-   <input type="radio" name="presentation" value="b"> B<br>
-   <input type="radio" name="presentation" value="c"> C<br>
-   <input type="radio" name="presentation" value="d"> D<br>
-   <br>
-   Participation in lessons:<br>
-   <input type="radio" name="participation" value="a"> A<br>
-   <input type="radio" name="participation" value="b"> B<br>
-   <input type="radio" name="participation" value="c"> C<br>
-   <input type="radio" name="participation" value="d"> D<br>
-   <br>
-   Organisational skills:<br>
-   <input type="radio" name="organisation" value="a"> A<br>
-   <input type="radio" name="organisation" value="b"> B<br>
-   <input type="radio" name="organisation" value="c"> C<br>
-   <input type="radio" name="organisation" value="d"> D<br>
-   <br>
-   Comments:<input type="text" name="teachercomments"><br>
-   <input type="Submit" value="Save">
-
-  </form>
+  <div id="tutorreport">
+    <form name="tutorreportform" action="scripts/tutorreportscript.php" method="post">
+      Pupil:<select name="pupilidreport">
+        <option value="null">Select a tutee</option>
+        <<?php
+         //produces list of pupils within tutor group
+         //makes use of the varibales in tutorgroup div
+         $pupilidsintutorgroup=$_SESSION["tutorgrouppupils"];
+         foreach ($pupilidsintutorgroup as $x) {
+           $stmt=$conn->prepare("SELECT Surname,Firstname FROM tblpupil WHERE Pupilid='$x'");
+           $stmt->execute();
+           while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+             echo ("<option value=".$x.">".$row["Firstname"].' '.$row["Surname"]."</option>");
+             }
+         }
+        ?>
+      </select><br>
+      Tutor Comments:<input type="text" name="tutorcomments"><br>
+      <input type="Submit" value="Enter">
+    </form>
   </div>
 </div>
 </body>

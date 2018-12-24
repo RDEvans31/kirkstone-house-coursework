@@ -4,8 +4,10 @@
 if ($_POST["userid"]=="null" or $_POST["subjectid"]=="null") {
   echo("Error: Missing data.");
 }else {
+  header("Location:../adminforms/adminassignteachertosubject.php");
   include_once("connection.php");
   array_map("htmlspecialchars", $_POST);
+  $userid=$_POST["userid"];
   $getsubjects=$conn->prepare("SELECT * FROM tblsubject");
   $getsubjects->execute();
   while ($row = $getsubjects->fetch(PDO::FETCH_ASSOC))
@@ -19,14 +21,10 @@ if ($_POST["userid"]=="null" or $_POST["subjectid"]=="null") {
   $Year=date("Y");//this gets the year in long form eg. 2018
   $year=date("y"); //this gets the year in short form ie. 2018=18
   $setid=$setname.$subjectname.$year;
-  $teacheralreadyassigned=false;
-  $checkrecord=$conn->prepare("SELECT * FROM tblsubteacher WHERE Subjectid='".$subjectid."'");
-  $checkrecord->execute();
-  while ($row = $checkrecord->fetch(PDO::FETCH_ASSOC)) {
-    if ($row["Userid"]==$_POST["Userid"]) {
-      $teacheralreadyassigned=true;
-    }
-  }
+  //checks if a teacher has already been assigned
+  $teacheralreadyassigned=$conn->prepare("SELECT * FROM tblsubteacher WHERE EXISTS (SELECT * FROM tblsubteacher WHERE Subjectid='".$subjectid."' AND Userid='".$userid."')");
+  $teacheralreadyassigned->execute();
+
 
 if (!$teacheralreadyassigned) {
 //this sends the relevant data to tblsubteacher, assigning a teacher to a subject. Only runs if teacher is not already teaching the subject.
@@ -46,7 +44,7 @@ if (!$teacheralreadyassigned) {
   $stmt2->execute();
   $conn=null;
   echo("The set has been created and the teacher assigned to it.");
+
 }
+
 ?>
-</body>
-</html>

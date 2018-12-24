@@ -71,7 +71,6 @@
   First name:<input type="text" name="pupilfirstname"><br>
   Surname: <input type="text" name="pupilsurname"><br>
   Year: <input type="number" name="yeargroup"><br>
-  Tutor group:<input type="text" name="tutorgroup"><br>
   Date of Birth: <input type="date" name='dob'><br>
   <p>Please enter their Midyis scores below:</p>
   Vocabulary:<input type="text" name="MVocab"><br>

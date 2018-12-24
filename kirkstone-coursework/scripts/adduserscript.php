@@ -2,6 +2,7 @@
 <body>
 <?php
 include_once("connection.php");
+header("Location:../adminforms/adminadduser.php");
 array_map("htmlspecialchars", $_POST);
 $firstname=$_POST["firstname"];
 $surname=$_POST["surname"];

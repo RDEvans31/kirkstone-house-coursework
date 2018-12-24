@@ -136,32 +136,12 @@
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
           echo ("<li>".$row["Firstname"].' '.$row["Surname"]."</li>"); //prints name as list item.
         }
-       //clears all the students in this set from array so that it can be repopulated with studetns from the next set.
+       //clears all the students in this set from array so that it can be repopulated with students from the next set.
        unset($pupilsinset);
       }
     }
   ?>
-<div id="tutorreport">
-  <form name="tutorreportform" action="tutorreportscript.php" method="post">
-    Pupil:<select name="pupilidreport">
-      <option value="null">Select a tutee</option>
-      <<?php
-       //produces list of pupils within tutor group
-       //makes use of the varibales in tutorgroup div
-       $pupilidsintutorgroup=$_SESSION["tutorgroup"];
-       foreach ($pupilidsintutorgroup as $x) {
-         $stmt=$conn->prepare("SELECT Surname,Firstname FROM tblpupil WHERE Pupilid='$x'");
-         $stmt->execute();
-         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-           echo ("<option value=".$x.">".$row["Firstname"].' '.$row["Surname"]."</option>");
-           }
-       }
-      ?>
-    </select><br>
-    Tutor Comments:<input type="text" name="tutorcomments"><br>
-    <input type="Submit" value="Enter">
-  </form>
 </div>
-
+</div>
 </body>
 </html>

@@ -2,6 +2,7 @@
 <body>
 <?php //this script adds pupils to a tutor group
   include_once("connection.php");
+  header("Location:../adminforms/adminaddpupiltotutorgroup.php");
   array_map("htmlspecialchars", $_POST);
   $stmt=$conn->prepare("INSERT INTO tbltutorpupil (Tutorgroupid,Pupilid) VALUES (:tutorgroupid,:pupilid)");
   $stmt->bindParam(':tutorgroupid',$_POST["tutorgroupid"]);

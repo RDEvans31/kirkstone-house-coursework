@@ -11,7 +11,6 @@ while ($row = $getterm->fetch(PDO::FETCH_ASSOC)) {
     $term=$row["Term"];
   }
 }
-
 $setid=$_POST["setid"];
 $year=date("Y");
 //this will get the subject id based on the set id that had been sent through

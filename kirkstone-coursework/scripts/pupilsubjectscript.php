@@ -4,6 +4,7 @@
 if ($_POST["pupilid"]=="" or $_POST["subjectidpupil"]=="") {
   echo("Error: No data to send.");
 }else {
+  //header("Location:../adminforms/adminassignpupiltosubject.php");
   include_once("connection.php");
   array_map("htmlspecialchars", $_POST);
   $stmt=$conn->prepare("INSERT INTO tblpupilstudies (Pupilid,Setid) VALUES (:pupilid,:setid)");
@@ -11,7 +12,6 @@ if ($_POST["pupilid"]=="" or $_POST["subjectidpupil"]=="") {
   $stmt->bindParam(':setid', $_POST["setidpupil"]);
   $stmt->execute(); //executes the SQL with said contents
   $conn=null;
-  header("Location:formstesting.php");
 }
 
 ?>
