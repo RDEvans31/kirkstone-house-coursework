@@ -1,4 +1,3 @@
-<
 <html lang="en" > <!--this declares english language as the primary -->
 <head>
   <title>Login</title>
@@ -31,7 +30,7 @@
         <div class="card card-signin my-5">
           <div class="card-body">
             <h5 class="card-title text-center">Sign In</h5>
-            <form class="form-signin" action="kirkstone-coursework/loginscript.php" method="post">
+            <form class="form-signin" action="loginscript.php" method="post">
               <div class="form-label-group">
                 <input type="text" name="username" class="form-control" placeholder="Username"><!--clicking doesn't work-->
               </div>
