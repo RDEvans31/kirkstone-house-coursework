@@ -38,13 +38,14 @@
   ?>
 </head>
 <body>
-<nav class="navbar">
-<div class="container-fluid">
-
-  <div class="navbar-header"><a class="navbar-brand" href="..\Index.php">KHS</a></div>
-  <a class="navbar-brand" href="logoutscript.php">Logout</a>
-
-</nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="#">KHS</a>
+        <li class="nav-item">
+          <a class="nav-link" href="logoutscript.php">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 <div class="jumbotron text-center">
   <h1>Welcome</h1>
 <a href="head.php" class="btn">Select another year</a>
