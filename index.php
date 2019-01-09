@@ -13,7 +13,7 @@
   }
   </style>
   <?php
-   include_once("kirkstone-coursework/connection.php");
+   include_once("connection.php");
   ?>
 </head>
 <body>
