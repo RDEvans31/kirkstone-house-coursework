@@ -71,15 +71,15 @@
     Tutor:<select name="userid">
       <option value="null">Select a tutor</option>
       <?php
-      $stmt=$conn->prepare("SELECT * FROM tblusers WHERE Privilege=1");
-      $stmt->execute(); //this selects all record in tblpupil
+      $stmt=$conn->prepare("SELECT * FROM tblusers WHERE Privilege='1'");
+      $stmt->execute();
       while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
       {
         echo('<option value='.$row["Userid"].'>'.$row["Firstname"].' '.$row["Surname"].'</option>');//this prints them as options
       }
       ?>
     </select><br>
-    <button type="submit" class="btn btn-default">Create</button>
+    <input type="Submit" value="Assign">
   </form>
 </div>
 </body>
