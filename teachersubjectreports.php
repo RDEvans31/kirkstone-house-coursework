@@ -67,7 +67,7 @@ $userid=$_SESSION["userid"];
             <a class="dropdown-item" href="teacherviewsetgrades.php">Sets</a>
           </div>
         </li>
-        </li>
+        <li>
           <a class="nav-link" href="logoutscript.php">Logout</a>
         </li>
       </ul>

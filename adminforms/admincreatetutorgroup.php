@@ -71,7 +71,7 @@
     Tutor:<select name="userid">
       <option value="null">Select a tutor</option>
       <?php
-      $stmt=$conn->prepare("SELECT * FROM tblusers WHERE Privilege='1'");
+      $stmt=$conn->prepare("SELECT * FROM tblusers WHERE Privilege=1");
       $stmt->execute();
       while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
       {
