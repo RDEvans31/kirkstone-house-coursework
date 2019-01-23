@@ -50,7 +50,6 @@
     </div>
   </nav>
 
-      <!--JavaScript at end of body for optimized loading-->
 
 </body>
 </html>
