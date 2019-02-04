@@ -179,7 +179,7 @@ for ($i=1; $i<5 ; $i++) {
 $xcoord=$xcoord+20;
 $ycoord=$ycoord-20;
 $pdf->SetXY ($xcoord,$ycoord);
-//
+//creates the cells containing the totals of the awards per term
 foreach ($merits as $i) {
   $pdf->Cell(40,5,$i,1,0,'C');
   $xcoord=$xcoord+40;
@@ -211,5 +211,4 @@ foreach ($detentions as $i) {
 }
 
 $pdf->Output();
-
 ?>
