@@ -1,8 +1,8 @@
 <html lang="en" > <!--this declares english language as the primary -->
 <head>
   <title>Subject report</title>
-  <!--these connectt to bootstrap through a cdn-->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!--these connect to bootstrap through a cdn-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script>
@@ -22,12 +22,6 @@
           xhttp.send();
         }
   </script>
-  <style>
-  .jumbotron {
-    background-color: #444444;
-    color: #fff;
-  }
-  </style>
 <?php
 include_once("connection.php");
 session_start();
@@ -58,30 +52,69 @@ $userid=$_SESSION["userid"];
    Pupil: <select id="selectpupil" name="pupilid">
      <option>Select a set</option>
    </select><br>
-   Adherence to deadlines:<br>
-   <input type="radio" name="deadline" value="a"> A<br>
-   <input type="radio" name="deadline" value="b"> B<br>
-   <input type="radio" name="deadline" value="c"> C<br>
-   <input type="radio" name="deadline" value="d"> D<br>
-   <br>
-   Presentation of work:<br>
-   <input type="radio" name="presentation" value="a"> A<br>
-   <input type="radio" name="presentation" value="b"> B<br>
-   <input type="radio" name="presentation" value="c"> C<br>
-   <input type="radio" name="presentation" value="d"> D<br>
-   <br>
-   Participation in lessons:<br>
-   <input type="radio" name="participation" value="a"> A<br>
-   <input type="radio" name="participation" value="b"> B<br>
-   <input type="radio" name="participation" value="c"> C<br>
-   <input type="radio" name="participation" value="d"> D<br>
-   <br>
-   Organisational skills:<br>
-   <input type="radio" name="organisation" value="a"> A<br>
-   <input type="radio" name="organisation" value="b"> B<br>
-   <input type="radio" name="organisation" value="c"> C<br>
-   <input type="radio" name="organisation" value="d"> D<br>
-   <br>
+   Adherence to deadlines:
+   <div class="btn-group btn-group-toggle" data-toggle="buttons">
+      <label class="btn btn-secondary">
+        <input type="radio" name="deadline" value="a"> A
+      </label>
+      <label class="btn btn-secondary">
+        <input type="radio" name="deadline" value="b"> B
+      </label>
+      <label class="btn btn-secondary">
+        <input type="radio" name="deadline" value="c"> C
+      </label>
+      <label class="btn btn-secondary">
+        <input type="radio" name="deadline" value="d"> D
+      </label>
+    </div></br>
+
+   Presentation of work:
+  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+  <label class="btn btn-secondary">
+    <input type="radio" name="presentation" value="a"> A
+  </label>
+  <label class="btn btn-secondary">
+    <input type="radio" name="presentation" value="b"> B
+  </label>
+  <label class="btn btn-secondary">
+    <input type="radio" name="presentation" value="c"> C
+  </label>
+  <label class="btn btn-secondary">
+    <input type="radio" name="presentation" value="d"> D
+  </label>
+  </div></br>
+
+   Participation in lessons:
+  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+  <label class="btn btn-secondary">
+    <input type="radio" name="participation" value="a"> A
+  </label>
+  <label class="btn btn-secondary">
+    <input type="radio" name="participation" value="b"> B
+  </label>
+  <label class="btn btn-secondary">
+    <input type="radio" name="participation" value="c"> C
+  </label>
+  <label class="btn btn-secondary">
+    <input type="radio" name="participation" value="d"> D
+  </label>
+</div></br>
+
+   Organisational skills:
+  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+  <label class="btn btn-secondary">
+    <input type="radio" name="organisation" value="a"> A
+  </label>
+  <label class="btn btn-secondary">
+    <input type="radio" name="organisation" value="b"> B
+  </label>
+  <label class="btn btn-secondary">
+    <input type="radio" name="organisation" value="c"> C
+  </label>
+  <label class="btn btn-secondary">
+    <input type="radio" name="organisation" value="d"> D
+  </label>
+  </div></br>
    Comments:<input type="text" name="teachercomments"><br>
    <input type="Submit" value="Save">
 
