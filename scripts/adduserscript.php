@@ -2,7 +2,6 @@
 <body>
 <?php
 include_once("../connection.php");
-header("Location:../adminforms/adminadduser.php");
 array_map("htmlspecialchars", $_POST);
 $firstname=$_POST["firstname"];
 $surname=$_POST["surname"];
@@ -20,7 +19,10 @@ $stmt->bindParam(':password', $password);
 $stmt->bindParam(':privilege', $privilege);
 $stmt->execute(); //executes the SQL with said contents
 $conn=null;
-echo("Data transfer successful");
+echo "<script type='text/javascript'>
+    alert('Submitted.');
+    window.location.replace(\"../adminforms/adminadduser.php\");
+</script>";
 ?>
 </body>
 </html>

@@ -1,7 +1,4 @@
-<html>
-<body>
 <?php
-header("Location:../teachertutorreports.php");
 include_once("../connection.php");
 session_start();
 array_map("htmlspecialchars", $_POST);
@@ -13,6 +10,8 @@ $stmt->bindParam(':userid', $tutor);
 $stmt->bindParam(':year', $Year);
 $stmt->bindParam(':tutorcomments', $_POST["tutorcomments"]);
 $stmt->execute();
+echo "<script type='text/javascript'>
+    alert('Submitted.');
+    window.location.replace(\"../teachertutorreports.php\");
+</script>";
 ?>
-</body>
-</html>

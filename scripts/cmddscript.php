@@ -7,7 +7,6 @@ $getname->execute();
 $row = $getname->fetch(PDO::FETCH_ASSOC);
 $name=$row["Firstname"].' '.$row["Surname"];
 $message = 'Added '.$column.' to '.$name;
-
 echo "<SCRIPT type='text/javascript'>
     alert('$message');
     window.location.replace(\"../teacheraddcmdd.php\");

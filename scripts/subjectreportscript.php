@@ -1,5 +1,4 @@
 <?php
-header("Location:../teachersubjectreports.php");//redirects them back to the teacher page
 include_once("../connection.php");
 array_map("htmlspecialchars", $_POST);
 //this decides what term it is for the report
@@ -31,4 +30,8 @@ $stmt->bindParam(':participation', $_POST["participation"]);
 $stmt->bindParam(':organisation', $_POST["organisation"]);
 $stmt->bindParam(':teachercomments', $_POST["teachercomments"]);
 $stmt->execute();
+echo "<script type='text/javascript'>
+    alert('Submitted.');
+    window.location.replace(\"../teachersubjectreports.php\");
+</script>";
 ?>

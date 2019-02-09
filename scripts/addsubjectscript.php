@@ -1,7 +1,3 @@
-<!DOCTYPE html>
-<head>
-</head>
-<body>
 <?php
 include_once("../connection.php");
 array_map("htmlspecialchars", $_POST); //this is here to ensure that if SQL should be typed into the input field, it will not affect the database.
@@ -11,6 +7,8 @@ $stmt->bindParam(':subject', $_POST["subjectname"]); //assigns the input from th
 $stmt->bindParam(':content', $_POST["subjectcontents"]);
 $stmt->execute(); //executes the SQL with said contents
 $conn=null;
-header("Location:../adminforms/adminaddsubject.php");
+echo "<script type='text/javascript'>
+    alert('Submitted.');
+    window.location.replace(\"../adminforms/adminaddsubject.php\");
+</script>";
 ?>
-</body>

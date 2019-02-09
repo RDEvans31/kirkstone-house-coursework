@@ -2,9 +2,11 @@
 <body>
 <?php
 if ($_POST["userid"]=="null" or $_POST["subjectid"]=="null") {
-  echo("Error: Missing data.");
+  echo "<script type='text/javascript'>
+      alert('Error: Empty fields');
+      window.location.replace(\"../adminforms/adminassignteachertosubject.php\");
+  </script>";
 }else {
-  header("Location:../adminforms/adminassignteachertosubject.php");
   include_once("../connection.php");
   array_map("htmlspecialchars", $_POST);
   $userid=$_POST["userid"];
@@ -43,7 +45,10 @@ if (!$teacheralreadyassigned) {
   $stmt2->bindParam(':userid', $_POST["userid"]);
   $stmt2->execute();
   $conn=null;
-  echo("The set has been created and the teacher assigned to it.");
+  echo "<script type='text/javascript'>
+      alert('Submitted.');
+      window.location.replace(\"../adminforms/adminassignteachertosubject.php\");
+  </script>";
 
 }
 

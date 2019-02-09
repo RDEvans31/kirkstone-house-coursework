@@ -1,7 +1,6 @@
 <html>
 <body>
 <?php
-header("Location:../teacherentergrades.php");//redirects them back to the teacher page
 include_once("../connection.php");
 array_map("htmlspecialchars", $_POST);
 $setid=$_POST["set"];
