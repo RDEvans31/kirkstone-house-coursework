@@ -1,5 +1,5 @@
 <?php
-include_once("connection.php");
+include_once("../connection.php");
 $column=$_POST["award"];
 $pupilid=$_POST["pupilid"];
 $getname=$conn->prepare("SELECT Firstname,Surname FROM tblpupil");

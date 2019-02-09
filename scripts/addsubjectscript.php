@@ -3,7 +3,7 @@
 </head>
 <body>
 <?php
-include_once("connection.php");
+include_once("../connection.php");
 array_map("htmlspecialchars", $_POST); //this is here to ensure that if SQL should be typed into the input field, it will not affect the database.
 //the line below assigns the contents of the second bracket to the fields stated in the first
 $stmt=$conn->prepare("INSERT INTO tblsubject (Subjectid,Subjectname,Content) VALUES (null,:subject,:content)");

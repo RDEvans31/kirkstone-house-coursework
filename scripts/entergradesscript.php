@@ -2,7 +2,7 @@
 <body>
 <?php
 header("Location:../teacherentergrades.php");//redirects them back to the teacher page
-include_once("connection.php");
+include_once("../connection.php");
 array_map("htmlspecialchars", $_POST);
 $setid=$_POST["set"];
 $pupilid=$_POST["pupilid"];
@@ -17,6 +17,10 @@ $stmt=$conn->prepare("UPDATE tblpupilstudies SET $achievefield=:achieve,$effortf
 $stmt->bindParam(':achieve', $_POST["achieve"]);
 $stmt->bindParam(':effort', $_POST["effort"]);
 $stmt->execute();
+echo "<script type='text/javascript'>
+    alert('Submitted.');
+    window.location.replace(\"../teacherentergrades.php\");
+</script>";
 ?>
 </body>
 </html>

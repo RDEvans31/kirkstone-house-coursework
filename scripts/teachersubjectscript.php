@@ -5,7 +5,7 @@ if ($_POST["userid"]=="null" or $_POST["subjectid"]=="null") {
   echo("Error: Missing data.");
 }else {
   header("Location:../adminforms/adminassignteachertosubject.php");
-  include_once("connection.php");
+  include_once("../connection.php");
   array_map("htmlspecialchars", $_POST);
   $userid=$_POST["userid"];
   $getsubjects=$conn->prepare("SELECT * FROM tblsubject");

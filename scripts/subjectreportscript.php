@@ -1,6 +1,6 @@
 <?php
 header("Location:../teachersubjectreports.php");//redirects them back to the teacher page
-include_once("connection.php");
+include_once("../connection.php");
 array_map("htmlspecialchars", $_POST);
 //this decides what term it is for the report
 $date=date("Y-m-d");

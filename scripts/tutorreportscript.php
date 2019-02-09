@@ -2,7 +2,7 @@
 <body>
 <?php
 header("Location:../teachertutorreports.php");
-include_once("connection.php");
+include_once("../connection.php");
 session_start();
 array_map("htmlspecialchars", $_POST);
 $Year=date("Y");

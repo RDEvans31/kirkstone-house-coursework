@@ -11,10 +11,10 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { //this loops through the table a
 
   if ($_POST["username"]==$row["Username"]) { //this checks if the username used to log in matches the username of the current record
     if ($_POST["password"]==$row["Password"]) { //this checks the password and directs the user to the apporpriate page
-      //if more pages should be required for a new user type, follow this format 
+      //if more pages should be required for a new user type, follow this format
       switch ($row["Privilege"]) {
         case '0':
-        header("Location:admin.php");
+        header("Location:/adminforms/admin.php");
         break;
         case '1':
         header("Location:teacher.php");

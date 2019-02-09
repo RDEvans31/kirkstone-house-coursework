@@ -1,7 +1,7 @@
 <html>
 <body>
 <?php
-include_once("connection.php");
+include_once("../connection.php");
 header("Location:../adminforms/adminaddpupil.php");
 array_map("htmlspecialchars", $_POST);
 $stmt=$conn->prepare("INSERT INTO tblpupil (Pupilid,Surname,Firstname,Year,DoB,MidVocab,MidMaths,MidNonVerbal,MidSkills,MidScore) VALUES (null,:surname,:firstname,:year,:DoB,:vocab,:math,:nonverbal,:skills,:score)");
