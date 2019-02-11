@@ -24,11 +24,82 @@
   Year: <input type="number" name="yeargroup"><br>
   Date of Birth: <input type="date" name='dob'><br>
   <p>Please enter their Midyis scores below:</p>
-  Vocabulary:<input type="text" name="MVocab"><br>
-  Mathematics:<input type="text" name="MMath"><br>
-  Non-Verbal:<input type="text" name="MNonVerbal"><br>
-  Skills:<input type="text" name="MSkills"><br>
-  Score:<input type="text" name="MScore"><br>
+  Vocabulary:
+  <!--these radio buttons are the inputs for scores, they are easily changed, new ones canbe added by copying and pasting the section marked by <label></label> and just change the contents of the button.-->
+  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+     <label class="btn btn-secondary">
+       <input type="radio" name="MVocab" value="A"> A
+     </label>
+     <label class="btn btn-secondary">
+       <input type="radio" name="MVocab" value="B"> B
+     </label>
+     <label class="btn btn-secondary">
+       <input type="radio" name="MVocab" value="C"> C
+     </label>
+     <label class="btn btn-secondary">
+       <input type="radio" name="MVocab" value="D"> D
+     </label>
+   </div></br></br>
+  Mathematics:
+  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+     <label class="btn btn-secondary">
+       <input type="radio" name="MMath" value="A"> A
+     </label>
+     <label class="btn btn-secondary">
+       <input type="radio" name="MMath" value="B"> B
+     </label>
+     <label class="btn btn-secondary">
+       <input type="radio" name="MMath" value="C"> C
+     </label>
+     <label class="btn btn-secondary">
+       <input type="radio" name="MMath" value="D"> D
+     </label>
+   </div></br></br>
+  Non-Verbal:
+  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+     <label class="btn btn-secondary">
+       <input type="radio" name="MNonVerbal" value="A"> A
+     </label>
+     <label class="btn btn-secondary">
+       <input type="radio" name="MNonVerbal" value="B"> B
+     </label>
+     <label class="btn btn-secondary">
+       <input type="radio" name="MNonVerbal" value="C"> C
+     </label>
+     <label class="btn btn-secondary">
+       <input type="radio" name="MNonVerbal" value="D"> D
+     </label>
+   </div></br></br>
+  Skills:
+  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+     <label class="btn btn-secondary">
+       <input type="radio" name="MSkills" value="A"> A
+     </label>
+     <label class="btn btn-secondary">
+       <input type="radio" name="MSkills" value="B"> B
+     </label>
+     <label class="btn btn-secondary">
+       <input type="radio" name="MSkills" value="C"> C
+     </label>
+     <label class="btn btn-secondary">
+       <input type="radio" name="MSkills" value="D"> D
+     </label>
+   </div></br></br>
+  Score:
+  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+     <label class="btn btn-secondary">
+       <input type="radio" name="MScore" value="A"> A
+     </label>
+     <label class="btn btn-secondary">
+       <input type="radio" name="MScore" value="B"> B
+     </label>
+     <label class="btn btn-secondary">
+       <input type="radio" name="MScore" value="C"> C
+     </label>
+     <label class="btn btn-secondary">
+       <input type="radio" name="MScore" value="D"> D
+     </label>
+   </div></br>
   <input class="btn" type="submit" value="Add"><br>
 </form>
 </div>
