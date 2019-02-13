@@ -32,10 +32,10 @@ if ($_POST["userid"]=="null" or $_POST["subjectid"]=="null") {
   $stmt2->bindParam(':userid', $_POST["userid"]);
   $stmt2->execute();
   $conn=null;
-  /*echo "<script type='text/javascript'>
+  echo "<script type='text/javascript'>
       alert('Submitted.');
       window.location.replace(\"../adminforms/adminassignteachertosubject.php\");
-  </script>";*/
+  </script>";
 
 }
 
