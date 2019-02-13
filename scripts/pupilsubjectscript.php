@@ -1,6 +1,7 @@
 <html>
 <body>
 <?php
+include_once("../connection.php");
 if ($_POST["pupilid"]=="" or $_POST["subjectidpupil"]=="") {
   echo "<script type='text/javascript'>
       alert('Error: Fields are empty.');
