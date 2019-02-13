@@ -17,7 +17,7 @@
 <div id="navigation"></div>
 <div class="jumbotron text-center">
   <h3>Assign a pupil to a tutor group:</h3>
-  <form id=pupiltutorgroup action="..\script\addpupiltotutorgroup.php" method="post">
+  <form id=pupiltutorgroup action="..\scripts\addpupiltotutorgroup.php" method="post">
     Tutorgroup:
     <select name="tutorgroupid">
       <option value="null">Select a tutor group</option>
