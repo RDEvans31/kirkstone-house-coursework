@@ -23,19 +23,6 @@ if ($_POST["userid"]=="null" or $_POST["subjectid"]=="null") {
   $Year=date("Y");//this gets the year in long form eg. 2018
   $year=date("y"); //this gets the year in short form ie. 2018=18
   $setid=$setname.$subjectname.$year;
-  //checks if a teacher has already been assigned
-  $teacheralreadyassigned=$conn->prepare("SELECT * FROM tblsubteacher WHERE EXISTS (SELECT * FROM tblsubteacher WHERE Subjectid='".$subjectid."' AND Userid='".$userid."')");
-  $teacheralreadyassigned->execute();
-
-
-if (!$teacheralreadyassigned) {
-//this sends the relevant data to tblsubteacher, assigning a teacher to a subject. Only runs if teacher is not already teaching the subject.
-  $stmt=$conn->prepare("INSERT INTO tblsubteacher (Userid,Subjectid) VALUES (:userid,:subjectid)");
-  $stmt->bindParam(':userid', $_POST["userid"]); //assigns the input from the form to the values that will be added to the field
-  $stmt->bindParam(':subjectid', $_POST["subjectid"]);
-  $stmt->execute(); //executes the SQL with said contents
-  echo("Teacher assigned to ".$subjectname);
-}
 //this will send the relevant data to tblset to store which set was taugt by which teacher, in which year.
   $stmt2=$conn->prepare("INSERT INTO tblset(Setid,Setname,Subjectid,Year,Userid) VALUES (:setid,:name,:subject,:year,:userid)");
   $stmt2->bindParam(':setid', $setid);
@@ -45,10 +32,10 @@ if (!$teacheralreadyassigned) {
   $stmt2->bindParam(':userid', $_POST["userid"]);
   $stmt2->execute();
   $conn=null;
-  echo "<script type='text/javascript'>
+  /*echo "<script type='text/javascript'>
       alert('Submitted.');
       window.location.replace(\"../adminforms/adminassignteachertosubject.php\");
-  </script>";
+  </script>";*/
 
 }
 
