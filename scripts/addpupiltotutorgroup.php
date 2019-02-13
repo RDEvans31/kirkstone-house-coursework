@@ -8,6 +8,6 @@
   $conn=null;
   echo "<script type='text/javascript'>
       alert('Submitted.');
-      window.location.replace(\"../adminforms/adminaddpupiltotutorgroup.php\");
+      window.location.replace(\"../adminforms/adminassignpupiltotutorgroup.php\");
   </script>";
 ?>
