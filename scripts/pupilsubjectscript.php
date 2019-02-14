@@ -1,5 +1,3 @@
-<html>
-<body>
 <?php
 include_once("../connection.php");
 if ($_POST["pupilid"]=="" or $_POST["subjectidpupil"]=="") {
@@ -21,5 +19,3 @@ if ($_POST["pupilid"]=="" or $_POST["subjectidpupil"]=="") {
 }
 
 ?>
-</body>
-</html>

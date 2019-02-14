@@ -1,5 +1,3 @@
-<html>
-<body>
 <?php
 if ($_POST["userid"]=="null" or $_POST["subjectid"]=="null") {
   echo "<script type='text/javascript'>

@@ -1,5 +1,3 @@
-<html>
-<body>
 <?php
 include_once("../connection.php");
 array_map("htmlspecialchars", $_POST);
@@ -24,5 +22,3 @@ echo "<script type='text/javascript'>
     window.location.replace(\"../adminforms/adminadduser.php\");
 </script>";
 ?>
-</body>
-</html>

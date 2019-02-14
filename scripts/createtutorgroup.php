@@ -1,5 +1,3 @@
-<html>
-<body>
 <?php
 if ($_POST["userid"]=="null" or strlen($_POST["tutorgroupid"])==0) {
   echo "<script type='text/javascript'>
@@ -21,5 +19,3 @@ if ($_POST["userid"]=="null" or strlen($_POST["tutorgroupid"])==0) {
 }
 
 ?>
-</body>
-</html>
