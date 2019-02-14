@@ -26,6 +26,7 @@
   include_once("connection.php");
   session_start();
   $userid=$_SESSION["userid"];
+  $year=$_SESSION["Yearselectedfortutorreport"];
   ?>
 </head>
 <body>
@@ -50,7 +51,6 @@
       Pupil:<select onchange="showtutorcomments(this.value)" name="pupilid">
         <option value="">Select a pupil</option>
         <?php
-        $year=$_POST["Year"];
         $stmt=$conn->prepare("SELECT Pupilid,Firstname,Surname,Year FROM tblpupil WHERE Year='$year' ORDER BY Surname ASC"); //returns subjectid's of subjetcs taught by teacher that logged in
         $stmt->execute();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {

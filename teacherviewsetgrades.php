@@ -32,7 +32,7 @@
   foreach ($setstaught as $x) { //loops through each set taught by teacher
           echo(
         '<table class="table table-dark">
-          <caption style="color:#fff">Set:'.$x.'</caption>
+          <caption>Set:'.$x.'</caption>
         <thead>
           <tr>
             <th scope="col">Name</th>

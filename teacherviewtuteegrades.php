@@ -47,7 +47,6 @@
   <?php echo("<h3>Tutor group: ".$tutorgroup."</h3>")?>
 <div id="tutorgroupgrades" class="mt-5"><!--this will display the grades of each tutee-->
   <?php
-
   foreach ($pupilidsintutorgroup as $x) {
     $stmt=$conn->prepare("SELECT Surname,Firstname FROM tblpupil WHERE Pupilid='$x'");
     $stmt->execute();
@@ -55,16 +54,16 @@
     $name=$row["Firstname"].' '.$row["Surname"];//this gets the name of the pupil that we will output the grades for
     echo(
   '
-  <form action="teachergeneratetutorreport.php" method="post" target="teachergeneratetutorreport.php">
-    <input type="hidden" name="pupilid" value="'.$x.'">
-    <input type="hidden" name="tutorgroup" value="'.$tutorgroup.'">
-    <input class="btn btn-dark" type="Submit" value="Tutor report">
-  </form>
   <table id="tuteetable" class="table table-dark display">
   <thead>
     <tr>
       <th>Name:</th>
       <th>'.$name.'</th>
+      <th>  <form action="teachergeneratetutorreport.php" method="post" target="teachergeneratetutorreport.php">
+          <input type="hidden" name="pupilid" value="'.$x.'">
+          <input type="hidden" name="tutorgroup" value="'.$tutorgroup.'">
+          <input class="btn btn-dark" type="Submit" value="Tutor report">
+        </form></th>
     </tr>
     <tr>
       <th>Subject</th>

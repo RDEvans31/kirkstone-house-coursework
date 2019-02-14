@@ -39,6 +39,7 @@
   <div id="navigation"></div>
 <div class="jumbotron text-center">
   <h3>Welcome</h3>
+  <h5>Teacher page</h5>
 <div id="tutorgroup" class="panel-group"><!--this will display the tutor group of the teacher that has logged in-->
   <?php
   //this code creates session variables that contain information about the tutor group of the user
@@ -56,7 +57,7 @@
   }
   $_SESSION["tutorgroup"]=$tutorgroup;
   $_SESSION["tutorgrouppupils"]=$pupilidsintutorgroup;
-  
+
   ?>
   <div class="panel panel-default">
     <div class="panel-body">

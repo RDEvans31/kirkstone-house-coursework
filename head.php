@@ -47,7 +47,7 @@
 <div class="jumbotron text-center">
   <h3>Select a year group</h3>
 <div id="selectyear">
-  <form action="headcomments.php" method="post">
+  <form action="headintermediatepage.php" method="post">
     Year:<select name="Year">
       <option value="">Select a year</option>
       <?php
