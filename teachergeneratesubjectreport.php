@@ -119,6 +119,6 @@ $pdf->Cell(180,50,$teachercomments,1,0,'L');
 
 $pdf->SetXY (10,250);
 $pdf->Write(5,'Signed:');
-$pdf->Output();
+$pdf->Output('D',"$pupilname subject report.pdf");
 
 ?>

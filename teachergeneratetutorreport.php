@@ -210,5 +210,5 @@ foreach ($detentions as $i) {
   $pdf->SetXY ($xcoord,$ycoord);
 }
 
-$pdf->Output();
+$pdf->Output('D',"$pupilname tutorreport.pdf");
 ?>
